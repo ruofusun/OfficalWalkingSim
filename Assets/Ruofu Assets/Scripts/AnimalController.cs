@@ -74,5 +74,18 @@ public class AnimalController : MonoBehaviour
         
     }
 
+    public FoodController TargetFood
+    {
+        get => targetFood;
+        set => targetFood = value;
+    }
+
+
+    public void ConsumeFood()
+    {
+        detectedFood.Remove(targetFood);
+        Destroy(targetFood.gameObject);
+    }
+
 }
 
