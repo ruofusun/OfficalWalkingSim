@@ -39,7 +39,7 @@ public class MoveTowards : Action
             return TaskStatus.Success;
         }
 
-        StartCoroutine(RotateAndMove());
+     //   StartCoroutine(RotateAndMove());
         rigidbody.velocity = offset.normalized * Speed.Value;
 
       //  Debug.Log(offset.magnitude + animal.TargetFood.name);
@@ -59,7 +59,7 @@ public class MoveTowards : Action
  
         //rotate us over time according to speed until we are in the required rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 2f);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         
         
     }
