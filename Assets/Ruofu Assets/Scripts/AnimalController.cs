@@ -11,11 +11,13 @@ public class AnimalController : MonoBehaviour
 
     private List<FoodController> detectedFood;
     private FoodController targetFood;
+    private MoodCanvasController moodCanvasController;
     
     // Start is called before the first frame update
     void Start()
     {
         detectedFood = new List<FoodController>();
+        moodCanvasController = GetComponentInChildren<MoodCanvasController>();
     }
 
     // Update is called once per frame
@@ -79,6 +81,8 @@ public class AnimalController : MonoBehaviour
         get => targetFood;
         set => targetFood = value;
     }
+
+    public MoodCanvasController MoodCanvasController => moodCanvasController;
 
 
     public void ConsumeFood()

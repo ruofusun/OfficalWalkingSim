@@ -52,7 +52,8 @@ public class FirstPersonDrifter: MonoBehaviour
     private Vector3 contactPoint;
     private bool playerControl = false;
     private int jumpTimer;
- 
+
+    public Transform fakePlayer;
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -108,15 +109,28 @@ public class FirstPersonDrifter: MonoBehaviour
             // Otherwise recalculate moveDirection directly from axes, adding a bit of -y to avoid bumping down inclines
             else {
                 moveDirection = new Vector3(inputX * inputModifyFactor, -antiBumpFactor, inputY * inputModifyFactor);
-                moveDirection = myTransform.TransformDirection(moveDirection) * speed;
+                Debug.Log("inputx"+ inputX);
+                Debug.Log("inputy"+ inputY);
+                Debug.Log("movedirection" + moveDirection);
+                
+                moveDirection.y = 0;
+               moveDirection = fakePlayer.TransformDirection(moveDirection) * speed;
+          //   moveDirection = moveDirection.normalized * speed;
+               
+                Debug.Log("newmovedirection" + moveDirection);
+       
+             //   moveDirection.x = 0;
+             //   moveDirection.z = 0;
                 playerControl = true;
             }
  
             // Jump! But only if the jump button has been released and player has been grounded for a given number of frames
             if (!Input.GetButton("Jump"))
                 jumpTimer++;
-            else if (jumpTimer >= antiBunnyHopFactor) {
-                moveDirection.y = jumpSpeed;
+            else if (jumpTimer >= antiBunnyHopFactor)
+            {
+              //  controller.Move(new Vector3(0, jumpSpeed, 0));
+               moveDirection.y = jumpSpeed;
                 jumpTimer = 0;
             }
         }
@@ -131,7 +145,8 @@ public class FirstPersonDrifter: MonoBehaviour
             if (airControl && playerControl) {
                 moveDirection.x = inputX * speed * inputModifyFactor;
                 moveDirection.z = inputY * speed * inputModifyFactor;
-                moveDirection = myTransform.TransformDirection(moveDirection);
+                moveDirection = fakePlayer.TransformDirection(moveDirection);
+                
             }
         }
  

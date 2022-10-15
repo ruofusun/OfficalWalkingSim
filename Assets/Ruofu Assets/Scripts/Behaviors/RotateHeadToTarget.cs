@@ -46,7 +46,7 @@ public class RotateHeadToTarget : Action
         t = Mathf.Min(1, t);
         //rotate us over time according to speed until we are in the required rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, t);
-        Debug.Log(t);
+//        Debug.Log(t);
         
      //   Debug.Log(offset);
     //    var offset = animal.transform.rotation.Diff(_lookRotation);
@@ -57,6 +57,7 @@ public class RotateHeadToTarget : Action
           //  transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation, 1);
             Debug.Log("ROTATION ENDS");
             return TaskStatus.Success;
+       
         }
 
      //   Debug.Log(offset);
