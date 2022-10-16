@@ -6,6 +6,15 @@ using UnityEngine;
 public class FoodController : MonoBehaviour
 {
     private Rigidbody rb;
+
+    public enum FoodType
+    {
+        potato,
+        apple
+        
+    }
+
+    public FoodType type = FoodType.potato;
     // Start is called before the first frame update
     void Start()
     {

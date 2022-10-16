@@ -19,6 +19,7 @@ public class MoodCanvasController : MonoBehaviour
 
     public List<Sprite> contents;
     private Mood currentmood = Mood.apple;
+    private AnimalController animalController;
 
     public enum Mood
     {
@@ -33,7 +34,7 @@ public class MoodCanvasController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        animalController = GetComponentInParent<AnimalController>();
     }
 
     // Update is called once per frame
@@ -51,7 +52,13 @@ public class MoodCanvasController : MonoBehaviour
 
     public void LoadFoodContent()
     {
-        currentmood = Mood.potato;
+        if (animalController.desiredFoodType == FoodController.FoodType.apple)
+        {
+            currentmood = Mood.apple;
+        }else if (animalController.desiredFoodType == FoodController.FoodType.potato)
+        {
+            currentmood = Mood.potato;
+        }
         LoadContent();
     }
     

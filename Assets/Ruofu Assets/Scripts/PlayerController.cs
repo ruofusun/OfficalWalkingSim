@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject food;
+    public GameObject potatofood;
+
+    public GameObject applefood;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Instantiate(food, transform.position + transform.forward, Quaternion.identity);
+            Instantiate(potatofood, transform.position + transform.forward, Quaternion.identity);
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Instantiate(applefood, transform.position + transform.forward, Quaternion.identity);
         }
     }
 }

@@ -11,6 +11,7 @@ public class AnimalController : MonoBehaviour
 
     private List<FoodController> detectedFood;
     private FoodController targetFood;
+    public FoodController.FoodType desiredFoodType;
     private MoodCanvasController moodCanvasController;
     
     // Start is called before the first frame update
@@ -33,7 +34,7 @@ public class AnimalController : MonoBehaviour
             Inthefarm = true;
         }
         FoodController food = other.GetComponent<FoodController>();
-        if (food)
+        if (food && food.type == desiredFoodType)
         {
             if (!detectedFood.Contains(food))
             {
@@ -49,7 +50,7 @@ public class AnimalController : MonoBehaviour
             Inthefarm = false;
         }
         FoodController food = other.GetComponent<FoodController>();
-        if (food)
+        if (food && food.type == desiredFoodType)
         {
             if (detectedFood.Contains(food))
             {
