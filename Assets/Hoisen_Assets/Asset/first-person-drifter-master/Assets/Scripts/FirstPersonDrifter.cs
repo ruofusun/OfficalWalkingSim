@@ -109,15 +109,15 @@ public class FirstPersonDrifter: MonoBehaviour
             // Otherwise recalculate moveDirection directly from axes, adding a bit of -y to avoid bumping down inclines
             else {
                 moveDirection = new Vector3(inputX * inputModifyFactor, -antiBumpFactor, inputY * inputModifyFactor);
-                Debug.Log("inputx"+ inputX);
-                Debug.Log("inputy"+ inputY);
-                Debug.Log("movedirection" + moveDirection);
+              //  Debug.Log("inputx"+ inputX);
+              //  Debug.Log("inputy"+ inputY);
+             //   Debug.Log("movedirection" + moveDirection);
                 
                 moveDirection.y = 0;
                moveDirection = fakePlayer.TransformDirection(moveDirection) * speed;
           //   moveDirection = moveDirection.normalized * speed;
                
-                Debug.Log("newmovedirection" + moveDirection);
+            //    Debug.Log("newmovedirection" + moveDirection);
        
              //   moveDirection.x = 0;
              //   moveDirection.z = 0;
