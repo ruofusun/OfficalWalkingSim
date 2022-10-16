@@ -10,6 +10,11 @@ public class FirstPersonDrifter: MonoBehaviour
 {
     public float walkSpeed = 6.0f;
     public float runSpeed = 10.0f;
+    public float climbSpeed;
+
+    public float climbDetectRadius;
+
+    public MouseLook mouseLook;
  
     // If true, diagonal speed (when strafing + moving forward or back) can't exceed normal move speed; otherwise it's about 1.4 times faster
     private bool limitDiagonalSpeed = true;
@@ -41,9 +46,10 @@ public class FirstPersonDrifter: MonoBehaviour
  
     private Vector3 moveDirection = Vector3.zero;
     private bool grounded = false;
+    public bool climbing = false;
     private CharacterController controller;
     private Transform myTransform;
-    private float speed;
+    public float speed;
     private RaycastHit hit;
     private float fallStartLevel;
     private bool falling;
@@ -61,6 +67,7 @@ public class FirstPersonDrifter: MonoBehaviour
         rayDistance = controller.height * .5f + controller.radius;
         slideLimit = controller.slopeLimit - .1f;
         jumpTimer = antiBunnyHopFactor;
+        mouseLook = GetComponent<MouseLook>();
     }
  
     void FixedUpdate() {
@@ -68,9 +75,29 @@ public class FirstPersonDrifter: MonoBehaviour
         float inputY = Input.GetAxis("Vertical");
         // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
         float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed)? .7071f : 1.0f;
- 
-        if (grounded) {
+
+
+        //Climb Tree detection
+        if (Physics.Raycast(myTransform.position, transform.rotation.eulerAngles, out hit, rayDistance * climbDetectRadius))
+        {
+            Debug.Log("Tree detection.....");
+            if (Input.GetKey(KeyCode.Q))
+            {
+                climbing = true;
+                mouseLook.SetSensitivity(0.5f);
+                moveDirection.y = climbSpeed;
+                moveDirection.x = 0;
+            }
+        }
+        else
+        {
+            climbing = false;
+        }
+
+        if (grounded && !climbing) {
             bool sliding = false;
+            mouseLook.SetSensitivity(5f);
+
             // See if surface immediately below should be slid down. We use this normally rather than a ControllerColliderHit point,
             // because that interferes with step climbing amongst other annoyances
             if (Physics.Raycast(myTransform.position, -Vector3.up, out hit, rayDistance)) {
@@ -84,7 +111,7 @@ public class FirstPersonDrifter: MonoBehaviour
                 if (Vector3.Angle(hit.normal, Vector3.up) > slideLimit)
                     sliding = true;
             }
- 
+
             // If we were falling, and we fell a vertical distance greater than the threshold, run a falling damage routine
             if (falling) {
                 falling = false;
