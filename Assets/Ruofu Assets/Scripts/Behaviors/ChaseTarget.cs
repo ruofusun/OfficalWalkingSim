@@ -20,7 +20,7 @@ public class ChaseTarget :Action
          crow = GetComponent<CrowController>();
         if (target == null)
         {
-            target.Value = crow.target.transform.position+ new Vector3(0, 2, 0);;
+            target.Value = crow.target.transform.position+ new Vector3(0, 1, 0);;
         }
 
     }
@@ -35,6 +35,14 @@ public class ChaseTarget :Action
 
         target.Value = crow.target.transform.position + new Vector3(0, 2, 0);
         offset = target.Value - transform.position;
+        
+        
+        //send afraid event to the other animals
+        var behaviorTree = crow.target.GetComponent<BehaviorTree>();
+        behaviorTree.SendEvent<object>("afraid",5);
+
+        Vector3 rotation = crow.target.transform.rotation.eulerAngles;
+        transform.eulerAngles = rotation;
     //    if (offset.sqrMagnitude < Offset)
      //   {
          //   return TaskStatus.Success;
