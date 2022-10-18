@@ -15,6 +15,7 @@ public class MouseRayCast : MonoBehaviour
     public bool isReadyStore;
     public bool isReadySleep;
     public ScenesManager scenesM;
+    public float rayDistance = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -41,15 +42,15 @@ public class MouseRayCast : MonoBehaviour
     {
         //Vector3 focusPoint = new Vector3(Screen.width / 2, Screen.height / 2);
 
-        //´ÓÉãÏñ»ú·¢³öµ½µã»÷×ø±êµÄÉäÏß
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(ray, out hitInfo,1))
+        if (Physics.Raycast(transform.position, transform.forward,  out hitInfo,rayDistance))
         {
             Debug.DrawLine(ray.origin, hitInfo.point);
 
-            //»®³öÉäÏß£¬Ö»ÓÐÔÚsceneÊÓÍ¼ÖÐ²ÅÄÜ¿´µ½
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½Ö»ï¿½ï¿½ï¿½ï¿½sceneï¿½ï¿½Í¼ï¿½Ð²ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½
             GameObject gameObj = hitInfo.collider.gameObject;
             Debug.Log("click object name is " + gameObj.name);
 
@@ -73,8 +74,8 @@ public class MouseRayCast : MonoBehaviour
                 outline1.outlineShader.SetActive(true);
             }
 
-            //µ±ÉäÏßÅö×²Ä¿±êÎªbootÀàÐÍµÄÎïÆ·£¬Ö´ÐÐÊ°È¡²Ù×÷
-            //Åö×²Ä¿±êÎªPatatoÊ±£º
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²Ä¿ï¿½ï¿½Îªbootï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ö´ï¿½ï¿½Ê°È¡ï¿½ï¿½ï¿½ï¿½
+            //ï¿½ï¿½×²Ä¿ï¿½ï¿½ÎªPatatoÊ±ï¿½ï¿½
             if (gameObj.tag == "Patato")
             {
                 if (Input.GetMouseButton(0))

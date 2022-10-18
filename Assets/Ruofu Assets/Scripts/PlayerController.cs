@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Instantiate(potatofood, transform.position + transform.forward, Quaternion.identity);
+           // Instantiate(potatofood, transform.position + transform.forward, Quaternion.identity);
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
