@@ -2546,6 +2546,113 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1114181339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1114181344}
+  - component: {fileID: 1114181343}
+  - component: {fileID: 1114181342}
+  - component: {fileID: 1114181341}
+  - component: {fileID: 1114181340}
+  m_Layer: 0
+  m_Name: fakeplayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!143 &1114181340
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114181339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5000001
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1114181341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114181339}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a9933f332744a448082eea5c70a300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invertY: 0
+  sensitivityX: 5
+  sensitivityY: 5
+  minimumX: -360
+  maximumX: 360
+  minimumY: -360
+  maximumY: 360
+  framesOfSmoothing: 5
+--- !u!114 &1114181342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114181339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082810dab150a8745833191d71344ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invertY: 0
+  sensitivityX: 10
+  sensitivityY: 5
+  minimumX: -360
+  maximumX: 360
+  minimumY: -360
+  maximumY: 360
+  framesOfSmoothing: 5
+--- !u!136 &1114181343
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114181339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1114181344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114181339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.5, y: 3.08, z: 72.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1129920441
 GameObject:
   m_ObjectHideFlags: 0
@@ -6669,7 +6776,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.6
+  m_Radius: 2
   m_Height: 10.313311
   m_Direction: 1
   m_Center: {x: -0.52693176, y: 5.2173214, z: -0.4297228}
@@ -7176,7 +7283,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22856
+  m_Name: pb_Mesh49612
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13458,7 +13565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 6
   runSpeed: 10
-  climbSpeed: 1
+  climbSpeed: 10
   climbDetectRadius: 2.42
   mouseLook: {fileID: 354866471986178619}
   enableRunning: 0
@@ -13472,6 +13579,7 @@ MonoBehaviour:
   antiBunnyHopFactor: 1
   climbing: 0
   speed: 0
+  fakePlayer: {fileID: 1114181344}
 --- !u!114 &354866471986178611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13532,14 +13640,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a9933f332744a448082eea5c70a300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 1
   invertY: 0
-  sensitivityX: 10
-  sensitivityY: 9
+  sensitivityX: 5
+  sensitivityY: 5
   minimumX: -360
   maximumX: 360
-  minimumY: -85
-  maximumY: 85
+  minimumY: -360
+  maximumY: 360
   framesOfSmoothing: 5
 --- !u!114 &354866471986178621
 MonoBehaviour:
@@ -13637,7 +13744,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354866471991697373}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 75.7, y: 3.08, z: 17.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13645,7 +13752,7 @@ Transform:
   - {fileID: 354866471991854079}
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &354866471991854079
 Transform:
   m_ObjectHideFlags: 0
