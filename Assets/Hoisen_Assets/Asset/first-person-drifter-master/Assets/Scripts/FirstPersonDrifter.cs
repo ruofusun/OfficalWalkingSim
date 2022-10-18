@@ -76,18 +76,30 @@ public class FirstPersonDrifter: MonoBehaviour
         float inputY = Input.GetAxis("Vertical");
         // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
         float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed)? .7071f : 1.0f;
-
-
+        
+       
+         Vector3 tempDir= new Vector3(inputX * inputModifyFactor, -antiBumpFactor, inputY * inputModifyFactor);
+          //  Debug.Log("inputx"+ inputX);
+          //  Debug.Log("inputy"+ inputY);
+          //   Debug.Log("movedirection" + moveDirection);
+                
+          tempDir.y = 0;
+          tempDir = fakePlayer.TransformDirection(moveDirection) * speed;
+          
+          Debug.DrawLine(myTransform.position,
+           myTransform.position+ transform.forward*5, Color.cyan);
+      
         //Climb Tree detection
-        if (Physics.Raycast(myTransform.position, transform.rotation.eulerAngles, out hit, rayDistance * climbDetectRadius))
+        if (Physics.Raycast(myTransform.position, transform.forward, out hit, rayDistance * climbDetectRadius))
         {
             Debug.Log("Tree detection.....");
             if (Input.GetKey(KeyCode.Q))
             {
                 climbing = true;
-                mouseLook.SetSensitivity(0.5f);
-                moveDirection.y = climbSpeed;
-                moveDirection.x = 0;
+              //  mouseLook.SetSensitivity(0.5f);
+              controller.Move(new Vector3(0, climbSpeed, 0) * Time.deltaTime);
+              //  moveDirection.y = climbSpeed;
+               // moveDirection.x = 0;
             }
         }
         else
@@ -97,7 +109,7 @@ public class FirstPersonDrifter: MonoBehaviour
 
         if (grounded && !climbing) {
             bool sliding = false;
-            mouseLook.SetSensitivity(5f);
+          //  mouseLook.SetSensitivity(5f);
 
             // See if surface immediately below should be slid down. We use this normally rather than a ControllerColliderHit point,
             // because that interferes with step climbing amongst other annoyances
@@ -142,6 +154,7 @@ public class FirstPersonDrifter: MonoBehaviour
                 
                 moveDirection.y = 0;
                moveDirection = fakePlayer.TransformDirection(moveDirection) * speed;
+       
           //   moveDirection = moveDirection.normalized * speed;
                
             //    Debug.Log("newmovedirection" + moveDirection);

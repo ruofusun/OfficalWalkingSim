@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1056464203}
   - component: {fileID: 1056464205}
   - component: {fileID: 1056464204}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1525136894}
   - component: {fileID: 1525136893}
   - component: {fileID: 1525136892}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: MoodCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 1984760382}
   - component: {fileID: 1984760384}
   - component: {fileID: 1984760383}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
