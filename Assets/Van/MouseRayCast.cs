@@ -29,37 +29,37 @@ public class MouseRayCast : MonoBehaviour
         if (!isReadyStore)
         {
             storeTimer += Time.deltaTime;
-            if(storeTimer > storeLimit)
+            if (storeTimer > storeLimit)
             {
                 storeTimer = 0;
                 isReadyStore = true;
             }
         }
-        
-         if (Input.GetMouseButtonDown(0) && picker.pickupGameObject)
+
+        if (Input.GetMouseButtonDown(0) && picker.pickupGameObject)
         {
             picker.DropGameObject();
 
         }
-    
+
         //�������������������������
-    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(transform.position, transform.forward,  out hitInfo,rayDistance))
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance))
         {
-           // Debug.DrawLine(ray.origin, hitInfo.point);
+            // Debug.DrawLine(ray.origin, hitInfo.point);
 
             //�������ߣ�ֻ����scene��ͼ�в��ܿ���
             GameObject gameObj = hitInfo.collider.gameObject;
             Debug.Log("click object name is " + gameObj.name);
 
-            if(gameObj != rayCastObject)
+            if (gameObj != rayCastObject)
             {
-                if(rayCastObject != null)
+                if (rayCastObject != null)
                 {
                     rayCastObject.TryGetComponent(out OutlineReflection outline);
-                    if(outline != null)
+                    if (outline != null)
                     {
                         outline.outlineShader.SetActive(false);
                     }
@@ -69,7 +69,7 @@ public class MouseRayCast : MonoBehaviour
 
             }
 
-            if(rayCastObject.TryGetComponent(out OutlineReflection outline1))
+            if (rayCastObject.TryGetComponent(out OutlineReflection outline1))
             {
                 outline1.outlineShader.SetActive(true);
             }
@@ -99,13 +99,15 @@ public class MouseRayCast : MonoBehaviour
                     }
                 }
             }
+
             if (gameObj.tag == "PatatoBox")
             {
                 if (Input.GetMouseButton(0) && isReadyStore)
                 {
                     isReadyStore = false;
-                    
-                    Debug.Log("Restore the patatoes you have in your bag!        " + patatoCollector.amountOfPatatoInBag);
+
+                    Debug.Log(
+                        "Restore the patatoes you have in your bag!        " + patatoCollector.amountOfPatatoInBag);
 
                     if (scenesM.isScene1)
                     {
@@ -120,9 +122,9 @@ public class MouseRayCast : MonoBehaviour
 
             }
 
-            if(gameObj.tag == "SleepSpot")
+            if (gameObj.tag == "SleepSpot")
             {
-                if(Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0))
                 {
                     if (isReadySleep)
                     {
@@ -138,28 +140,19 @@ public class MouseRayCast : MonoBehaviour
         }
         else
         {
-                if(rayCastObject != null)
+            if (rayCastObject != null)
+            {
+                if (Input.GetMouseButtonDown(0) && picker.pickupGameObject)
                 {
-                    rayCastObject.TryGetComponent(out OutlineReflection outline);
-                    if(outline != null)
-                    {
-                        outline.outlineShader.SetActive(false);
-                    }
+                    picker.DropGameObject();
                 }
+            }
         }
-        
-     
-
-        
-        
-        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         //Vector3 focusPoint = new Vector3(Screen.width / 2, Screen.height / 2);
-
-       
     }
 }
