@@ -35,20 +35,20 @@ public class MouseRayCast : MonoBehaviour
                 isReadyStore = true;
             }
         }
-    }
+        
+         if (Input.GetMouseButtonDown(0) && picker.pickupGameObject)
+        {
+            picker.DropGameObject();
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        //Vector3 focusPoint = new Vector3(Screen.width / 2, Screen.height / 2);
-
+        }
+    
         //�������������������������
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
 
         if (Physics.Raycast(transform.position, transform.forward,  out hitInfo,rayDistance))
         {
-            Debug.DrawLine(ray.origin, hitInfo.point);
+           // Debug.DrawLine(ray.origin, hitInfo.point);
 
             //�������ߣ�ֻ����scene��ͼ�в��ܿ���
             GameObject gameObj = hitInfo.collider.gameObject;
@@ -78,7 +78,7 @@ public class MouseRayCast : MonoBehaviour
             //��ײĿ��ΪPatatoʱ��
             if (gameObj.tag == "Patato")
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     Debug.Log("pickup the PaTATO!");
 
@@ -147,6 +147,19 @@ public class MouseRayCast : MonoBehaviour
                     }
                 }
         }
+        
+     
 
+        
+        
+        
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        //Vector3 focusPoint = new Vector3(Screen.width / 2, Screen.height / 2);
+
+       
     }
 }

@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            Instantiate(applefood, transform.position + transform.forward, Quaternion.identity);
+            //Instantiate(applefood, transform.position + transform.forward, Quaternion.identity);
         }
     }
 }
