@@ -533,13 +533,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apple: {fileID: 21300000, guid: b58ef8c7f5f05d248b814276971dbd6c, type: 3}
-  potato: {fileID: 21300000, guid: 9748a86ea1b40564083e1488735dafba, type: 3}
+  potato: {fileID: 21300000, guid: aed659f7bb8264b49a36cf1462e27a7c, type: 3}
   heart: {fileID: 21300000, guid: ff88e2fff5f3b5b43b0f3eb283d881f1, type: 3}
   afraid: {fileID: 21300000, guid: fa3b6b814f3762043a6948439782f6ac, type: 3}
   contentImage: {fileID: 5281918367197805397}
   contents:
   - {fileID: 21300000, guid: f88c8af99f5b3b04b991c934971479cb, type: 3}
-  - {fileID: 21300000, guid: d5d0a0281b9562c478a7e2fec5d1b960, type: 3}
+  - {fileID: 21300000, guid: aed659f7bb8264b49a36cf1462e27a7c, type: 3}
   - {fileID: 21300000, guid: 20cf44b4b48c1ea4bb93260457fc77d4, type: 3}
   - {fileID: 21300000, guid: fa3b6b814f3762043a6948439782f6ac, type: 3}
   - {fileID: 21300000, guid: 72945ce778a9b88439c71e9dc22d8945, type: 3}
