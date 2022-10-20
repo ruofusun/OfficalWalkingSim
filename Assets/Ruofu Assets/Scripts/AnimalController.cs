@@ -102,6 +102,7 @@ public class AnimalController : MonoBehaviour
     public void ConsumeFood()
     {
         detectedFood.Remove(targetFood);
+        if(targetFood)
         Destroy(targetFood.gameObject);
         currentFavor++;
     }

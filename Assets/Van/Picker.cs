@@ -106,6 +106,11 @@ public class Picker : MonoBehaviour
             }
             pickupGameObject.transform.eulerAngles = new Vector3(0, pickupGameObject.transform.eulerAngles.y, 0);
 
+            FoodController food = pickupGameObject.GetComponent<FoodController>();
+            if (food && food.NeedPickUp)
+            {
+                food.NeedPickUp = false;
+            }
 
             pickupGameObject.transform.SetParent(null);
             pickupGameObject = null;
@@ -119,9 +124,7 @@ public class Picker : MonoBehaviour
 
     public void DropCertainGameObject(GameObject obj)
         {
-           
-            
-                AnimalController animal = obj.GetComponent<AnimalController>();
+            AnimalController animal = obj.GetComponent<AnimalController>();
                 if (animal&&!animal.IsFavored())
                 {
                     return;
@@ -153,6 +156,11 @@ public class Picker : MonoBehaviour
                 obj.transform.eulerAngles = new Vector3(0, obj.transform.eulerAngles.y, 0);
             
             
+                FoodController food = obj.GetComponent<FoodController>();
+                if (food && food.NeedPickUp)    
+                {
+                    food.NeedPickUp = false;
+                }
                 obj.transform.SetParent(null);
                 pickupGameObject = null;
 
