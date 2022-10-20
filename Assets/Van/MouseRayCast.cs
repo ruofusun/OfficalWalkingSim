@@ -68,6 +68,7 @@ public class MouseRayCast : MonoBehaviour
                 rayCastObject = gameObj;
 
             }
+         
 
             if (rayCastObject.TryGetComponent(out OutlineReflection outline1))
             {
@@ -78,7 +79,7 @@ public class MouseRayCast : MonoBehaviour
             //��ײĿ��ΪPatatoʱ��
             if (gameObj.tag == "Patato")
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButton(0))
                 {
                     Debug.Log("pickup the PaTATO!");
 
@@ -101,7 +102,8 @@ public class MouseRayCast : MonoBehaviour
             }
             if (gameObj.tag == "Chicken")
             {
-                if (Input.GetMouseButtonDown(0))// todo: need to check the favorability of chicken 
+                Debug.Log("get chicken");
+                if (Input.GetMouseButton(0))
                 {
                     Debug.Log("pickup the Chicken!");
                     picker.PickUpGameObject(rayCastObject);
@@ -151,8 +153,9 @@ public class MouseRayCast : MonoBehaviour
         {
             if (rayCastObject != null)
             {
-                if (Input.GetMouseButtonDown(0) && picker.pickupGameObject)
+                if (Input.GetMouseButton(0) && picker.pickupGameObject)
                 {
+                    Debug.Log("drop chicken");
                     picker.DropGameObject();
                 }
             }

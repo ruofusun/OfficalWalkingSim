@@ -13,8 +13,13 @@ public class Picker : MonoBehaviour
 
     public Vector3 chickenRotation;
 
+    private bool canPick = true;
+
     public void PickUpGameObject(GameObject holdingTarget)
     {
+
+        if (!canPick)
+            return;
         pickupGameObject = holdingTarget;
         
         BehaviorTree bt = pickupGameObject.GetComponent<BehaviorTree>();
@@ -23,7 +28,7 @@ public class Picker : MonoBehaviour
             var behaviorTree = pickupGameObject.GetComponent<BehaviorTree>();
             behaviorTree.SendEvent<object>("pickup",5);
             AnimalController animal = pickupGameObject.GetComponent<AnimalController>();
-            if (!animal.IsFavored())
+            if (animal&&!animal.IsFavored())
             {
                 return;
             }
@@ -64,7 +69,7 @@ public class Picker : MonoBehaviour
         {
             
             AnimalController animal = pickupGameObject.GetComponent<AnimalController>();
-            if (!animal.IsFavored())
+            if (animal&&!animal.IsFavored())
             {
                 return;
             }
@@ -97,8 +102,10 @@ public class Picker : MonoBehaviour
             
             pickupGameObject.transform.SetParent(null);
             pickupGameObject = null;
-            
-            
+
+            StartCoroutine(ResetCanpickRoutine());
+
+
         }
     }
 
@@ -108,5 +115,12 @@ public class Picker : MonoBehaviour
         bt.SendEvent<object>(name,5);
         
 
+    }
+
+    IEnumerator ResetCanpickRoutine()
+    {
+        canPick = false;
+        yield return new WaitForSeconds(0.2f);
+        canPick = true;
     }
 }
