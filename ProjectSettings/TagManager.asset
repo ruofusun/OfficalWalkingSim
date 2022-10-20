@@ -9,6 +9,7 @@ TagManager:
   - PatatoBox
   - SleepSpot
   - FarmArea
+  - Chicken
   layers:
   - Default
   - TransparentFX

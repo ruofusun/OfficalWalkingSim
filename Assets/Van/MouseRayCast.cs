@@ -48,7 +48,7 @@ public class MouseRayCast : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance))
         {
-            // Debug.DrawLine(ray.origin, hitInfo.point);
+            Debug.DrawLine(transform.position, hitInfo.point);
 
             //�������ߣ�ֻ����scene��ͼ�в��ܿ���
             GameObject gameObj = hitInfo.collider.gameObject;
@@ -97,6 +97,15 @@ public class MouseRayCast : MonoBehaviour
                     {
                         picker.PickUpGameObject(rayCastObject);
                     }
+                }
+            }
+            if (gameObj.tag == "Chicken")
+            {
+                if (Input.GetMouseButtonDown(0))// todo: need to check the favorability of chicken 
+                {
+                    Debug.Log("pickup the Chicken!");
+                    picker.PickUpGameObject(rayCastObject);
+                    
                 }
             }
 

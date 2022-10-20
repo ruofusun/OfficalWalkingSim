@@ -14,6 +14,11 @@ public class AnimalController : MonoBehaviour
     public FoodController.FoodType desiredFoodType;
     private MoodCanvasController moodCanvasController;
     
+    
+    //favoribility system
+    private int currentFavor = 0;
+    public int favorThreshold = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +45,14 @@ public class AnimalController : MonoBehaviour
             {
                 detectedFood.Add(food);
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "FarmArea")
+        {
+            Inthefarm = true;
         }
     }
 
@@ -90,6 +103,12 @@ public class AnimalController : MonoBehaviour
     {
         detectedFood.Remove(targetFood);
         Destroy(targetFood.gameObject);
+        currentFavor++;
+    }
+
+    public bool IsFavored()
+    {
+        return currentFavor >= favorThreshold;
     }
 
 }
