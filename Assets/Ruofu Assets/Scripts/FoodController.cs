@@ -14,6 +14,8 @@ public class FoodController : MonoBehaviour
         
     }
 
+    public bool NeedPickUp = false;
+
     public FoodType type = FoodType.potato;
     // Start is called before the first frame update
     void Start()

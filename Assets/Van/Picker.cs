@@ -20,6 +20,12 @@ public class Picker : MonoBehaviour
 
         if (!canPick)
             return;
+
+        if (transform.childCount > 1 && transform.GetChild(1).gameObject != holdingTarget.gameObject)
+        {
+            DropCertainGameObject(transform.GetChild(0).gameObject);
+        }
+
         pickupGameObject = holdingTarget;
         
         BehaviorTree bt = pickupGameObject.GetComponent<BehaviorTree>();
@@ -67,29 +73,30 @@ public class Picker : MonoBehaviour
     {
         if (pickupGameObject)
         {
-            
+
             AnimalController animal = pickupGameObject.GetComponent<AnimalController>();
-            if (animal&&!animal.IsFavored())
+            if (animal && !animal.IsFavored())
             {
                 return;
             }
-          //  yield return new WaitForSeconds(0.1f);
+
+            //  yield return new WaitForSeconds(0.1f);
             Rigidbody rb = pickupGameObject.GetComponent<Rigidbody>();
             if (rb)
             {
                 rb.isKinematic = false;
                 rb.useGravity = true;
-                rb.AddForce(transform.forward*rb.mass*2f,ForceMode.Impulse);
+                rb.AddForce(transform.forward * rb.mass * 2f, ForceMode.Impulse);
             }
-            
+
             BehaviorTree bt = pickupGameObject.GetComponent<BehaviorTree>();
-            if(bt)
+            if (bt)
             {
                 bt.enabled = true;
-              //  bt.SendEvent<object>("dropoff",5);
-              StartCoroutine(SendEventRoutine(bt, "dropoff"));
+                //  bt.SendEvent<object>("dropoff",5);
+                StartCoroutine(SendEventRoutine(bt, "dropoff"));
             }
-            
+
             Animator anim = pickupGameObject.GetComponent<Animator>();
             {
                 if (anim)
@@ -98,8 +105,8 @@ public class Picker : MonoBehaviour
                 }
             }
             pickupGameObject.transform.eulerAngles = new Vector3(0, pickupGameObject.transform.eulerAngles.y, 0);
-            
-            
+
+
             pickupGameObject.transform.SetParent(null);
             pickupGameObject = null;
 
@@ -107,7 +114,54 @@ public class Picker : MonoBehaviour
 
 
         }
+
     }
+
+    public void DropCertainGameObject(GameObject obj)
+        {
+           
+            
+                AnimalController animal = obj.GetComponent<AnimalController>();
+                if (animal&&!animal.IsFavored())
+                {
+                    return;
+                }
+                //  yield return new WaitForSeconds(0.1f);
+                Rigidbody rb = obj.GetComponent<Rigidbody>();
+                if (rb)
+                {
+                    rb.isKinematic = false;
+                    rb.useGravity = true;
+                    rb.AddForce(transform.forward*rb.mass*2f,ForceMode.Impulse);
+                }
+            
+                BehaviorTree bt = obj.GetComponent<BehaviorTree>();
+                if(bt)
+                {
+                    bt.enabled = true;
+                    //  bt.SendEvent<object>("dropoff",5);
+                    StartCoroutine(SendEventRoutine(bt, "dropoff"));
+                }
+            
+                Animator anim =obj.GetComponent<Animator>();
+                {
+                    if (anim)
+                    {
+                        anim.enabled = true;
+                    }
+                }
+                obj.transform.eulerAngles = new Vector3(0, obj.transform.eulerAngles.y, 0);
+            
+            
+                obj.transform.SetParent(null);
+                pickupGameObject = null;
+
+                StartCoroutine(ResetCanpickRoutine());
+
+
+            }
+
+    
 
     IEnumerator SendEventRoutine(BehaviorTree bt, string name)
     {

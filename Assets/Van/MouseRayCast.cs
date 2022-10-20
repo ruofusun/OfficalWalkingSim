@@ -58,7 +58,7 @@ public class MouseRayCast : MonoBehaviour
             {
                 if (rayCastObject != null)
                 {
-                    rayCastObject.TryGetComponent(out OutlineReflection outline);
+                   OutlineReflection outline = rayCastObject.GetComponentInChildren<OutlineReflection>(); 
                     if (outline != null)
                     {
                         outline.outlineShader.SetActive(false);
@@ -69,8 +69,8 @@ public class MouseRayCast : MonoBehaviour
 
             }
          
-
-            if (rayCastObject.TryGetComponent(out OutlineReflection outline1))
+            OutlineReflection outline1 = rayCastObject.GetComponentInChildren<OutlineReflection>(); 
+            if (outline1)
             {
                 outline1.outlineShader.SetActive(true);
             }

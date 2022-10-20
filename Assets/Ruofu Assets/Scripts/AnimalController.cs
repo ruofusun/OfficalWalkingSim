@@ -39,7 +39,7 @@ public class AnimalController : MonoBehaviour
             Inthefarm = true;
         }
         FoodController food = other.GetComponent<FoodController>();
-        if (food && food.type == desiredFoodType)
+        if (food && food.type == desiredFoodType&& !food.NeedPickUp)
         {
             if (!detectedFood.Contains(food))
             {
@@ -63,7 +63,7 @@ public class AnimalController : MonoBehaviour
             Inthefarm = false;
         }
         FoodController food = other.GetComponent<FoodController>();
-        if (food && food.type == desiredFoodType)
+        if (food && food.type == desiredFoodType && !food.NeedPickUp)
         {
             if (detectedFood.Contains(food))
             {
