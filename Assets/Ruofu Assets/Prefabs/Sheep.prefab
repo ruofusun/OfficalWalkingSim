@@ -553,8 +553,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.8771248}
+  m_Center: {x: 0, y: 0.5, z: -0.061437607}
 --- !u!65 &295632013
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -602,6 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Inthefarm: 1
   desiredFoodType: 1
+  favorThreshold: 1
 --- !u!114 &295632015
 MonoBehaviour:
   m_ObjectHideFlags: 0

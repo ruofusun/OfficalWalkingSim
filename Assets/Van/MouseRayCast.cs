@@ -45,8 +45,14 @@ public class MouseRayCast : MonoBehaviour
         //�������������������������
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
+        // Bit shift the index of the layer (2) to get a bit mask
+        int layerMask = 1 << 2;
 
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance))
+        // This would cast rays only against colliders in layer 2.
+        // But instead we want to collide against everything except layer 2. The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance, layerMask))
         {
             Debug.DrawLine(transform.position, hitInfo.point);
 
@@ -110,6 +116,16 @@ public class MouseRayCast : MonoBehaviour
                     
                 }
             }
+            if (gameObj.tag == "Apple")
+            {
+                Debug.Log("get apple");
+                if (Input.GetMouseButton(0))
+                {
+                    Debug.Log("pickup the apple!");
+                    picker.PickUpGameObject(rayCastObject);
+                    
+                }
+            }
 
             if (gameObj.tag == "PatatoBox")
             {
@@ -155,7 +171,7 @@ public class MouseRayCast : MonoBehaviour
             {
                 if (Input.GetMouseButton(0) && picker.pickupGameObject)
                 {
-                    Debug.Log("drop chicken");
+                    Debug.Log("drop the item");
                     picker.DropGameObject();
                 }
             }
