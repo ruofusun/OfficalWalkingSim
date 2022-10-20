@@ -17,11 +17,14 @@ public class MouseRayCast : MonoBehaviour
     public ScenesManager scenesM;
     public float rayDistance = 1;
 
+    private UIController uiController;
+
     // Start is called before the first frame update
     void Start()
     {
         picker = GetComponent<Picker>();
         rayCastObject = null;
+        uiController = FindObjectOfType<UIController>();
     }
 
     private void Update()
@@ -59,6 +62,10 @@ public class MouseRayCast : MonoBehaviour
             //�������ߣ�ֻ����scene��ͼ�в��ܿ���
             GameObject gameObj = hitInfo.collider.gameObject;
             Debug.Log("click object name is " + gameObj.name);
+            if (gameObj.name.Contains("Terrain"))
+            {
+                uiController.HideUI();
+            }
 
             if (gameObj != rayCastObject)
             {
@@ -85,6 +92,7 @@ public class MouseRayCast : MonoBehaviour
             //��ײĿ��ΪPatatoʱ��
             if (gameObj.tag == "Patato")
             {
+                uiController.ShowUI();
                 if (Input.GetMouseButton(0))
                 {
                     Debug.Log("pickup the PaTATO!");
@@ -108,6 +116,7 @@ public class MouseRayCast : MonoBehaviour
             }
             if (gameObj.tag == "Chicken")
             {
+                uiController.ShowUI();
                 Debug.Log("get chicken");
                 if (Input.GetMouseButton(0))
                 {
@@ -118,6 +127,7 @@ public class MouseRayCast : MonoBehaviour
             }
             if (gameObj.tag == "Apple")
             {
+                uiController.ShowUI();
                 Debug.Log("get apple");
                 if (Input.GetMouseButton(0))
                 {
