@@ -26,7 +26,9 @@ public class MoodCanvasController : MonoBehaviour
         apple,
         potato,
         heart,
-        afraid
+        afraid,
+        angry,
+        goal
     }
 
 
@@ -73,7 +75,17 @@ public class MoodCanvasController : MonoBehaviour
         currentmood = Mood.afraid;
         LoadContent();
     }
+    public void LoadAngryContent()
+    {
+        currentmood = Mood.angry;
+        LoadContent();
+    }
 
+    public void LoadGoalContent()
+    {
+        currentmood = Mood.goal;
+        LoadContent();
+    }
     public IEnumerator LoadContentRoutine(Mood mood)
     {
         List<Image> children = transform.GetComponentsInChildren<Image>(true).ToList();

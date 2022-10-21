@@ -17,11 +17,14 @@ public class MouseRayCast : MonoBehaviour
     public ScenesManager scenesM;
     public float rayDistance = 1;
 
+    private UIController uiController;
+
     // Start is called before the first frame update
     void Start()
     {
         picker = GetComponent<Picker>();
         rayCastObject = null;
+        uiController = FindObjectOfType<UIController>();
     }
 
     private void Update()
@@ -45,20 +48,30 @@ public class MouseRayCast : MonoBehaviour
         //�������������������������
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
+        // Bit shift the index of the layer (2) to get a bit mask
+        int layerMask = 1 << 2;
 
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance))
+        // This would cast rays only against colliders in layer 2.
+        // But instead we want to collide against everything except layer 2. The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance, layerMask))
         {
-            // Debug.DrawLine(ray.origin, hitInfo.point);
+            Debug.DrawLine(transform.position, hitInfo.point);
 
             //�������ߣ�ֻ����scene��ͼ�в��ܿ���
             GameObject gameObj = hitInfo.collider.gameObject;
             Debug.Log("click object name is " + gameObj.name);
+            if (gameObj.name.Contains("Terrain"))
+            {
+                uiController.HideUI();
+            }
 
             if (gameObj != rayCastObject)
             {
                 if (rayCastObject != null)
                 {
-                    rayCastObject.TryGetComponent(out OutlineReflection outline);
+                   OutlineReflection outline = rayCastObject.GetComponentInChildren<OutlineReflection>(); 
                     if (outline != null)
                     {
                         outline.outlineShader.SetActive(false);
@@ -68,8 +81,9 @@ public class MouseRayCast : MonoBehaviour
                 rayCastObject = gameObj;
 
             }
-
-            if (rayCastObject.TryGetComponent(out OutlineReflection outline1))
+         
+            OutlineReflection outline1 = rayCastObject.GetComponentInChildren<OutlineReflection>(); 
+            if (outline1)
             {
                 outline1.outlineShader.SetActive(true);
             }
@@ -78,7 +92,8 @@ public class MouseRayCast : MonoBehaviour
             //��ײĿ��ΪPatatoʱ��
             if (gameObj.tag == "Patato")
             {
-                if (Input.GetMouseButtonDown(0))
+                uiController.ShowUI();
+                if (Input.GetMouseButton(0))
                 {
                     Debug.Log("pickup the PaTATO!");
 
@@ -97,6 +112,28 @@ public class MouseRayCast : MonoBehaviour
                     {
                         picker.PickUpGameObject(rayCastObject);
                     }
+                }
+            }
+            if (gameObj.tag == "Chicken")
+            {
+                uiController.ShowUI();
+                Debug.Log("get chicken");
+                if (Input.GetMouseButton(0))
+                {
+                    Debug.Log("pickup the Chicken!");
+                    picker.PickUpGameObject(rayCastObject);
+                    
+                }
+            }
+            if (gameObj.tag == "Apple")
+            {
+                uiController.ShowUI();
+                Debug.Log("get apple");
+                if (Input.GetMouseButton(0))
+                {
+                    Debug.Log("pickup the apple!");
+                    picker.PickUpGameObject(rayCastObject);
+                    
                 }
             }
 
@@ -142,8 +179,9 @@ public class MouseRayCast : MonoBehaviour
         {
             if (rayCastObject != null)
             {
-                if (Input.GetMouseButtonDown(0) && picker.pickupGameObject)
+                if (Input.GetMouseButton(0) && picker.pickupGameObject)
                 {
+                    Debug.Log("drop the item");
                     picker.DropGameObject();
                 }
             }

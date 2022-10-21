@@ -40,7 +40,11 @@ public class MoveTowards : Action
         }
 
      //   StartCoroutine(RotateAndMove());
+     
         rigidbody.velocity = offset.normalized * Speed.Value;
+        var _direction = (animal.TargetFood.transform.position- transform.position).normalized;
+        var  _lookRotation = Quaternion.LookRotation(_direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 2f);
 
       //  Debug.Log(offset.magnitude + animal.TargetFood.name);
        // rigidbody.velocity = offset.normalized * Speed.Value;

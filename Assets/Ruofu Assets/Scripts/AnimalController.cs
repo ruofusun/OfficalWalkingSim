@@ -14,6 +14,11 @@ public class AnimalController : MonoBehaviour
     public FoodController.FoodType desiredFoodType;
     private MoodCanvasController moodCanvasController;
     
+    
+    //favoribility system
+    private int currentFavor = 0;
+    public int favorThreshold = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,12 +39,20 @@ public class AnimalController : MonoBehaviour
             Inthefarm = true;
         }
         FoodController food = other.GetComponent<FoodController>();
-        if (food && food.type == desiredFoodType)
+        if (food && food.type == desiredFoodType&& !food.NeedPickUp)
         {
             if (!detectedFood.Contains(food))
             {
                 detectedFood.Add(food);
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "FarmArea")
+        {
+            Inthefarm = true;
         }
     }
 
@@ -50,7 +63,7 @@ public class AnimalController : MonoBehaviour
             Inthefarm = false;
         }
         FoodController food = other.GetComponent<FoodController>();
-        if (food && food.type == desiredFoodType)
+        if (food && food.type == desiredFoodType && !food.NeedPickUp)
         {
             if (detectedFood.Contains(food))
             {
@@ -89,7 +102,14 @@ public class AnimalController : MonoBehaviour
     public void ConsumeFood()
     {
         detectedFood.Remove(targetFood);
+        if(targetFood)
         Destroy(targetFood.gameObject);
+        currentFavor++;
+    }
+
+    public bool IsFavored()
+    {
+        return currentFavor >= favorThreshold;
     }
 
 }
