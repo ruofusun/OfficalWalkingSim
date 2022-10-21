@@ -11,6 +11,7 @@ TagManager:
   - FarmArea
   - Chicken
   - Apple
+  - AppleTree
   layers:
   - Default
   - TransparentFX

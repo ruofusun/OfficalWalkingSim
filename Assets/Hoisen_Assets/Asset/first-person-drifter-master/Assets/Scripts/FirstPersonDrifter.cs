@@ -47,6 +47,7 @@ public class FirstPersonDrifter: MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private bool grounded = false;
     public bool climbing = false;
+    public bool isInTree = false;
     private CharacterController controller;
     private Transform myTransform;
     public float speed;
@@ -92,15 +93,23 @@ public class FirstPersonDrifter: MonoBehaviour
         //Climb Tree detection
         if (Physics.Raycast(myTransform.position, transform.forward, out hit, rayDistance * climbDetectRadius))
         {
-            Debug.Log("Tree detection.....");
-            if (Input.GetKey(KeyCode.Q))
+            if(hit.collider.tag == "Tree")
             {
-                climbing = true;
-              //  mouseLook.SetSensitivity(0.5f);
-              controller.Move(new Vector3(0, climbSpeed, 0) * Time.deltaTime);
-              //  moveDirection.y = climbSpeed;
-               // moveDirection.x = 0;
+                Debug.Log("test tree");
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    climbing = true;
+                    //  mouseLook.SetSensitivity(0.5f);
+                    controller.Move(new Vector3(0, climbSpeed, 0) * Time.deltaTime);
+                    //  moveDirection.y = climbSpeed;
+                    // moveDirection.x = 0;
+                }
+                else
+                {
+                    climbing = false;
+                }
             }
+
         }
         else
         {
@@ -207,5 +216,29 @@ public class FirstPersonDrifter: MonoBehaviour
     void FallingDamageAlert (float fallDistance)
     {
         //print ("Ouch! Fell " + fallDistance + " units!");   
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "AppleTree")
+        {
+            isInTree = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "AppleTree")
+        {
+            isInTree = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "AppleTree")
+        {
+            isInTree = true;
+        }
     }
 }
