@@ -8,7 +8,11 @@ public class LookAtObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (_object == null)
+        {
+            _object = FindObjectOfType<Camera>().gameObject;
+        }
+
     }
 
     // Update is called once per frame

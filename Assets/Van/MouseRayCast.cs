@@ -44,6 +44,11 @@ public class MouseRayCast : MonoBehaviour
             picker.DropGameObject();
 
         }
+        if (Input.GetMouseButtonDown(1) && picker.pickupGameObject)
+        {
+            picker.ThrowGameObject();
+
+        }
 
         //�������������������������
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

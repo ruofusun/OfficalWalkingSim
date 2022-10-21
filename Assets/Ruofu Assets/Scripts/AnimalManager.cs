@@ -22,11 +22,23 @@ public class AnimalManager : MonoBehaviour
     public List<AnimalController> GetCurrentAnimals()
     {
         animals = FindObjectsOfType<AnimalController>().ToList();
+        List<AnimalController> temp = new List<AnimalController>();
+        
+        foreach (var animal in animals)
+        {
+            if (animal.Inthefarm && !animal.IsNPC)
+            {
+               temp.Add(animal);
+            }
+        }
+
+        animals = temp;
         return animals;
     }
 
     public AnimalController GetOneRandomAnimal()
     {
+        GetCurrentAnimals();
         int rand = Random.Range(0, animals.Count);
         return animals[rand];
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using UnityEditor;
 using UnityEngine;
 
 public class MoveTowards : Action
@@ -34,7 +35,12 @@ public class MoveTowards : Action
         }
 
           offset =  animal.TargetFood.transform.position - transform.position;
-        if (offset.sqrMagnitude < Offset)
+          if (animal.TargetFood == null)
+          {
+              return TaskStatus.Failure;
+          }
+
+          if (offset.sqrMagnitude < Offset)
         {
             return TaskStatus.Success;
         }

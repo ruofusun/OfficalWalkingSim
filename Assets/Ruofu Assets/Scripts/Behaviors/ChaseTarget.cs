@@ -23,6 +23,11 @@ public class ChaseTarget :Action
             target.Value = crow.target.transform.position+ new Vector3(0, 1, 0);;
         }
 
+        if (target != null)
+        {
+            crow.target.ChangeFavorValue(-1);
+        }
+
     }
 
     private Vector3 offset;

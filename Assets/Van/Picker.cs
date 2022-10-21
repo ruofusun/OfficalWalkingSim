@@ -168,6 +168,60 @@ public class Picker : MonoBehaviour
 
 
             }
+            
+            
+
+    public void ThrowGameObject()
+    {
+        if (pickupGameObject)
+        {
+
+            AnimalController animal = pickupGameObject.GetComponent<AnimalController>();
+            if (animal && !animal.IsFavored())
+            {
+                return;
+            }
+            
+            Rigidbody rb = pickupGameObject.GetComponent<Rigidbody>();
+            if (rb)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true;
+                rb.AddForce(transform.forward * rb.mass * 5f, ForceMode.Impulse);
+            }
+
+            BehaviorTree bt = pickupGameObject.GetComponent<BehaviorTree>();
+            if (bt)
+            {
+                bt.enabled = true;
+                //  bt.SendEvent<object>("dropoff",5);
+                StartCoroutine(SendEventRoutine(bt, "dropoff"));
+            }
+
+            Animator anim = pickupGameObject.GetComponent<Animator>();
+            {
+                if (anim)
+                {
+                    anim.enabled = true;
+                }
+            }
+            pickupGameObject.transform.eulerAngles = new Vector3(0, pickupGameObject.transform.eulerAngles.y, 0);
+
+            FoodController food = pickupGameObject.GetComponent<FoodController>();
+            if (food && food.NeedPickUp)
+            {
+                food.NeedPickUp = false;
+            }
+
+            pickupGameObject.transform.SetParent(null);
+            pickupGameObject = null;
+
+            StartCoroutine(ResetCanpickRoutine());
+
+
+        }
+
+    }
 
     
 

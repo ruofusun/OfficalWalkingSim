@@ -603,6 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inthefarm: 1
+  IsNPC: 1
   desiredFoodType: 1
   favorThreshold: 1
 --- !u!114 &295632015

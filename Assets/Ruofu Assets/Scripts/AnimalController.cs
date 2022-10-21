@@ -8,6 +8,7 @@ using UnityEngine;
 public class AnimalController : MonoBehaviour
 {
     public bool Inthefarm = true;
+    public bool IsNPC = false;
 
     private List<FoodController> detectedFood;
     private FoodController targetFood;
@@ -110,6 +111,11 @@ public class AnimalController : MonoBehaviour
     public bool IsFavored()
     {
         return currentFavor >= favorThreshold;
+    }
+
+    public void ChangeFavorValue(int value)
+    {
+        currentFavor += value;
     }
 
 }

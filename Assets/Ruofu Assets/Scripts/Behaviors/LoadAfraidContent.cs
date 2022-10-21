@@ -13,8 +13,18 @@ public class LoadAfraidContent : Action
     //  public SharedTransform target;
     public override void OnStart()
     {
-        moodCanvasController = GetComponent<AnimalController>().MoodCanvasController;
- 
+
+        AnimalController animal = GetComponent<AnimalController>();
+        if (animal)
+        {
+            moodCanvasController = animal.MoodCanvasController;
+        }
+        else
+        {
+            moodCanvasController = GetComponent<CrowController>().MoodCanvasController;
+        }
+        
+
         //  sp = GetComponent<SpriteRenderer>();
         //   enemy =  GetComponent<EnemyController>();
         if (moodCanvasController )
