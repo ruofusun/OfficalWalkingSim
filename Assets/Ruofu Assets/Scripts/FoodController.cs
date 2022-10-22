@@ -6,6 +6,7 @@ using UnityEngine;
 public class FoodController : MonoBehaviour
 {
     private Rigidbody rb;
+    public bool isInTree;
 
     public enum FoodType
     {
@@ -17,10 +18,17 @@ public class FoodController : MonoBehaviour
     public bool NeedPickUp = false;
 
     public FoodType type = FoodType.potato;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+    }
+
+    public void CancelFreeze()
+    {
+        
     }
 
     // Update is called once per frame
