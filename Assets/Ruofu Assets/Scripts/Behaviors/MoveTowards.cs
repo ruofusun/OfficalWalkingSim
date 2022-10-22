@@ -12,6 +12,8 @@ public class MoveTowards : Action
     public float Offset = 0.25f;
     public SharedFloat Speed = 2f;
     private AnimalController animal;
+    public SharedFloat timer = 10f;
+    private float cd = 0;
 
 
 
@@ -44,6 +46,12 @@ public class MoveTowards : Action
         {
             return TaskStatus.Success;
         }
+          cd += Time.deltaTime;
+          if (cd > timer.Value)
+          {
+              return TaskStatus.Failure;
+              cd = 0;
+          }
 
      //   StartCoroutine(RotateAndMove());
      

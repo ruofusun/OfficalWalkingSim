@@ -40,7 +40,14 @@ public class AnimalManager : MonoBehaviour
     {
         GetCurrentAnimals();
         int rand = Random.Range(0, animals.Count);
-        return animals[rand];
+        if (animals.Count > 0)
+        {
+            return animals[rand];
+        }
+        else
+        {
+            return null;
+        }
 
     }
 }

@@ -187,7 +187,7 @@ MonoBehaviour:
   restartWhenComplete: 1
   logTaskChanges: 0
   group: 0
-  resetValuesOnRestart: 1
+  resetValuesOnRestart: 0
   externalBehavior: {fileID: 0}
   mBehaviorSource:
     behaviorName: Behavior
@@ -280,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Inthefarm: 0
   IsNPC: 0
+  IsTutorialChicken: 1
   desiredFoodType: 0
   favorThreshold: 1
 --- !u!65 &5281918366929024227

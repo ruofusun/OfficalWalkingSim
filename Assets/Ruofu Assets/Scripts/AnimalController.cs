@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BehaviorDesigner.Runtime;
 using Sirenix.Utilities;
 using UnityEngine;
 
@@ -9,11 +10,14 @@ public class AnimalController : MonoBehaviour
 {
     public bool Inthefarm = true;
     public bool IsNPC = false;
+    public bool IsTutorialChicken = false;
 
     private List<FoodController> detectedFood;
     private FoodController targetFood;
     public FoodController.FoodType desiredFoodType;
     private MoodCanvasController moodCanvasController;
+    private BehaviorTree behaviorTree;
+
     
     
     //favoribility system
@@ -23,6 +27,13 @@ public class AnimalController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        behaviorTree = GetComponent<BehaviorTree>();
+        if (!IsNPC && !IsTutorialChicken)
+        {
+
+            behaviorTree.SetVariableValue("Origin", transform.position);
+        }
+
         detectedFood = new List<FoodController>();
         moodCanvasController = GetComponentInChildren<MoodCanvasController>();
     }
@@ -106,6 +117,7 @@ public class AnimalController : MonoBehaviour
         if(targetFood)
         Destroy(targetFood.gameObject);
         currentFavor++;
+        currentFavor = Mathf.Min(currentFavor, 2);
     }
 
     public bool IsFavored()
@@ -116,6 +128,8 @@ public class AnimalController : MonoBehaviour
     public void ChangeFavorValue(int value)
     {
         currentFavor += value;
+        currentFavor = Mathf.Min(currentFavor, 2);
+        currentFavor = Mathf.Max(currentFavor, -1);
     }
 
 }

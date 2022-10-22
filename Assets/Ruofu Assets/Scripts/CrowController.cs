@@ -18,6 +18,7 @@ public class CrowController : MonoBehaviour
         behaviorTree = GetComponent<BehaviorTree>();
         behaviorTree.SetVariableValue("Origin", transform.position);
         moodCanvasController = GetComponentInChildren<MoodCanvasController>();
+        
     }
 
     public MoodCanvasController MoodCanvasController
@@ -39,11 +40,12 @@ public class CrowController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Patato")
+        FoodController food = other.gameObject.GetComponent<FoodController>();
+        if (food&& food.GetComponent<Rigidbody>().isKinematic==false)
         {
-            Debug.Log("potato hit crow");
-            FoodController food = other.gameObject.GetComponent<FoodController>();
-            if (food&& !food.NeedPickUp)
+            Debug.Log(" hit crow");
+
+            if ( !food.NeedPickUp)
             {
                 behaviorTree.SendEvent<object>("hit",5);
             }
