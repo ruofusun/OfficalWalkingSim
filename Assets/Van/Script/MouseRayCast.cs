@@ -97,7 +97,8 @@ public class MouseRayCast : MonoBehaviour
             //��ײĿ��ΪPatatoʱ��
             if (gameObj.tag == "Patato")
             {
-                uiController.ShowUI();
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
                 if (Input.GetMouseButton(0))
                 {
                     Debug.Log("pickup the PaTATO!");
@@ -121,7 +122,8 @@ public class MouseRayCast : MonoBehaviour
             }
             else if (gameObj.tag == "Chicken")
             {
-                uiController.ShowUI();
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
                 Debug.Log("get chicken");
                 if (Input.GetMouseButton(0))
                 {
@@ -132,7 +134,8 @@ public class MouseRayCast : MonoBehaviour
             }
             else if (gameObj.tag == "Apple")
             {
-                uiController.ShowUI();
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
                 Debug.Log("get apple");
                 if (Input.GetMouseButton(0))
                 {
@@ -148,7 +151,8 @@ public class MouseRayCast : MonoBehaviour
 
                 if (appleTree.apples.Count > 0)
                 {
-                    uiController.ShowUI();
+                  //  uiController.ShowUI();
+                  
 
                     if (Input.GetMouseButton(0))
                     {
@@ -206,7 +210,7 @@ public class MouseRayCast : MonoBehaviour
             }
             else
             {
-                uiController.HideUI();
+                uiController.HidePickUpUI();
             }
         }
         else
