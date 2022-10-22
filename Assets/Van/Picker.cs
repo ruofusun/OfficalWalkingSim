@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
@@ -15,6 +16,13 @@ public class Picker : MonoBehaviour
 
     private bool canPick = true;
 
+    private UIController uiController;
+
+    private void Start()
+    {
+        uiController = FindObjectOfType<UIController>();
+    }
+
     public void PickUpGameObject(GameObject holdingTarget)
     {
 
@@ -23,7 +31,7 @@ public class Picker : MonoBehaviour
 
         if (transform.childCount > 1 && transform.GetChild(1).gameObject != holdingTarget.gameObject)
         {
-            DropCertainGameObject(transform.GetChild(0).gameObject);
+            DropCertainGameObject(transform.GetChild(1).gameObject);
         }
 
         pickupGameObject = holdingTarget;
@@ -66,7 +74,7 @@ public class Picker : MonoBehaviour
             pickupGameObject.transform.localEulerAngles  = chickenRotation;
         }
 
-
+      uiController.ShowDropOffUI();
     }
 
     public void DropGameObject()
@@ -116,6 +124,7 @@ public class Picker : MonoBehaviour
             pickupGameObject = null;
 
             StartCoroutine(ResetCanpickRoutine());
+            uiController.HideUI();
 
 
         }
@@ -165,6 +174,7 @@ public class Picker : MonoBehaviour
                 pickupGameObject = null;
 
                 StartCoroutine(ResetCanpickRoutine());
+                uiController.HideUI();
 
 
             }
@@ -217,7 +227,7 @@ public class Picker : MonoBehaviour
             pickupGameObject = null;
 
             StartCoroutine(ResetCanpickRoutine());
-
+            uiController.HideUI();
 
         }
 

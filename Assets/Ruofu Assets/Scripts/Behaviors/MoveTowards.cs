@@ -26,6 +26,8 @@ public class MoveTowards : Action
            target.Value = animal.TargetFood.transform.position;
        }
 
+       cd = 0;
+
     }
 
     private Vector3 offset;
@@ -36,11 +38,20 @@ public class MoveTowards : Action
             return TaskStatus.Failure;
         }
 
-          offset =  animal.TargetFood.transform.position - transform.position;
-          if (animal.TargetFood == null)
-          {
-              return TaskStatus.Failure;
-          }
+        if (animal.TargetFood)
+        {
+            offset =  animal.TargetFood.transform.position - transform.position;
+        }
+        else
+        {
+            offset= Vector3.zero;
+        }
+
+
+        /* if (animal.TargetFood == null)
+         {
+             return TaskStatus.Failure;
+         }*/
 
           if (offset.sqrMagnitude < Offset)
         {
@@ -49,8 +60,8 @@ public class MoveTowards : Action
           cd += Time.deltaTime;
           if (cd > timer.Value)
           {
-              return TaskStatus.Failure;
               cd = 0;
+              return TaskStatus.Failure;
           }
 
      //   StartCoroutine(RotateAndMove());

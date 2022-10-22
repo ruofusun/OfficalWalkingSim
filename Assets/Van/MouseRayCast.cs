@@ -69,7 +69,8 @@ public class MouseRayCast : MonoBehaviour
             Debug.Log("click object name is " + gameObj.name);
             if (gameObj.name.Contains("Terrain"))
             {
-                uiController.HideUI();
+                uiController.HidePickUpUI();
+                
             }
 
             if (gameObj != rayCastObject)
@@ -97,7 +98,8 @@ public class MouseRayCast : MonoBehaviour
             //��ײĿ��ΪPatatoʱ��
             if (gameObj.tag == "Patato")
             {
-                uiController.ShowUI();
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
                 if (Input.GetMouseButton(0))
                 {
                     Debug.Log("pickup the PaTATO!");
@@ -121,7 +123,8 @@ public class MouseRayCast : MonoBehaviour
             }
             if (gameObj.tag == "Chicken")
             {
-                uiController.ShowUI();
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
                 Debug.Log("get chicken");
                 if (Input.GetMouseButton(0))
                 {
@@ -132,7 +135,8 @@ public class MouseRayCast : MonoBehaviour
             }
             if (gameObj.tag == "Apple")
             {
-                uiController.ShowUI();
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
                 Debug.Log("get apple");
                 if (Input.GetMouseButton(0))
                 {

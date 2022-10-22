@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+
+    public GameObject PickUpUI;
+
+    public GameObject DropThrowUI;
     
     // Start is called before the first frame update
     void Start()
@@ -19,15 +23,29 @@ public class UIController : MonoBehaviour
     }
 
 
-    public void ShowUI()
+    public void ShowPickUpUI()
     {
-        transform.GetChild(0).gameObject.SetActive(true);
-        transform.GetChild(1).gameObject.SetActive(true);
+        PickUpUI.gameObject.SetActive(true);
     }
     
+    public void HidePickUpUI()
+    {
+        PickUpUI.gameObject.SetActive(false);
+    }
+
     public void HideUI()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
-        transform.GetChild(1).gameObject.SetActive(false);
+        PickUpUI.gameObject.SetActive(false);
+        DropThrowUI.gameObject.SetActive(false);
+    }
+
+    public void ShowDropOffUI()
+    {
+        DropThrowUI.gameObject.SetActive(true);
+    }
+
+    public void HideDropOffUI()
+    {
+        DropThrowUI.gameObject.SetActive(false);
     }
 }
