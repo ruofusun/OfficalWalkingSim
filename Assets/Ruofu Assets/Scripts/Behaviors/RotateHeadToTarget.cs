@@ -28,7 +28,7 @@ public class RotateHeadToTarget : Action
     private float t;
     public override TaskStatus OnUpdate()
     {
-        if (target == null)
+        if (target == null || animal.TargetFood== null)
         {
             return TaskStatus.Failure;
         }

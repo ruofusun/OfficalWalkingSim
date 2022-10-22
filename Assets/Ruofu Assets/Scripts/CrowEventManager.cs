@@ -7,7 +7,7 @@ public class CrowEventManager : MonoBehaviour
 
     public GameObject crow;
 
-    public float spawncd = 60f;
+    public float spawncd = 50f;
 
     private float timer = 0;
 
@@ -22,7 +22,7 @@ public class CrowEventManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > spawncd)
+        if (timer > (spawncd* eventIndex))
         {
             timer = 0;
             SpawnCrow();
@@ -40,6 +40,11 @@ public class CrowEventManager : MonoBehaviour
         }
 
         eventIndex++;
+
+        if (eventIndex == 3)
+        {
+            eventIndex = 0;
+        }
     }
 
 

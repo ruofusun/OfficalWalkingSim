@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using BehaviorDesigner.Runtime;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -86,10 +87,24 @@ public class AnimalController : MonoBehaviour
 
     public FoodController GetNearestFood()
     {
-        if (detectedFood.Count > 0)
+     /*   List<FoodController> temp= new List<FoodController>();
+
+        foreach (var food in detectedFood)
+        {
+            if (food)
+            {
+                temp.Add(food);
+            }
+
+        }
+
+        detectedFood = temp;*/
+     
+
+     if (detectedFood.Count > 0)
         {
             detectedFood = detectedFood.OrderBy(
-                x => Vector3.Distance(this.transform.position,x.transform.position)
+                x => Vector3.Distance(this.transform.position,x==null? new Vector3(10000,0,0):x.transform.position)
             ).ToList();
             targetFood = detectedFood[0];
             return detectedFood[0];
