@@ -5,7 +5,8 @@ using UnityEngine;
 public  class Global: MonoBehaviour
 {
     public static AnimalManager animalManager;
-    
+    public static PlayerController player;
+
 
 
     // public static  GameObject playerGrowSpell;
@@ -17,5 +18,14 @@ public  class Global: MonoBehaviour
 
 
         return animalManager;
+    }
+    
+    public static PlayerController GetPlayer()
+    {
+        if(player==null)
+           player = FindObjectOfType<PlayerController>();
+
+
+        return player;
     }
 }

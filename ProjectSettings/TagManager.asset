@@ -12,6 +12,7 @@ TagManager:
   - Chicken
   - Apple
   - AppleTree
+  - Sheep
   layers:
   - Default
   - TransparentFX

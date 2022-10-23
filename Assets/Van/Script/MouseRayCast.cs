@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BehaviorDesigner.Runtime;
 using UnityEngine;
 
 public class MouseRayCast : MonoBehaviour
@@ -129,6 +130,29 @@ public class MouseRayCast : MonoBehaviour
                 {
                     Debug.Log("pickup the Chicken!");
                     picker.PickUpGameObject(rayCastObject);
+                    
+                }
+            }
+            else if (gameObj.tag == "Sheep")
+            {
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
+                Debug.Log("get sheep");
+                if (Input.GetMouseButtonUp(0))
+                {
+                    BehaviorTree bt =  rayCastObject.GetComponent<BehaviorTree>();
+                    if(bt)
+                    {
+                        AnimalController animal =rayCastObject.GetComponent<AnimalController>();
+                        if (animal&&!animal.IsFavored())
+                        {
+                            return;
+                        }
+                        Debug.Log("whistle the sheep!");
+                        bt.SendEvent<object>("whistle",5);
+                       // bt.enabled = false;
+                    }
+                   
                     
                 }
             }
