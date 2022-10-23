@@ -44,7 +44,15 @@ public class MoveTowards : Action
         }
         else
         {
-            offset= Vector3.zero;
+            if (target.Value != Vector3.zero)
+            {
+                offset = target.Value - transform.position;
+                offset.y = 0;
+            }
+            else
+            {
+                offset= Vector3.zero;
+            }
         }
 
 
@@ -67,7 +75,11 @@ public class MoveTowards : Action
      //   StartCoroutine(RotateAndMove());
      
         rigidbody.velocity = offset.normalized * Speed.Value;
-        var _direction = (animal.TargetFood.transform.position- transform.position).normalized;
+       
+
+        
+
+        var _direction = offset.normalized;
         var  _lookRotation = Quaternion.LookRotation(_direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 2f);
 
