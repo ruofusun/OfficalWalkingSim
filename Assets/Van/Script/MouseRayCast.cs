@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BehaviorDesigner.Runtime;
 using UnityEngine;
 
 public class MouseRayCast : MonoBehaviour
@@ -20,6 +21,7 @@ public class MouseRayCast : MonoBehaviour
     public float observeDistance = 100;
 
     private UIController uiController;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class MouseRayCast : MonoBehaviour
         picker = GetComponent<Picker>();
         rayCastObject = null;
         uiController = FindObjectOfType<UIController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void CompareHitAndObserve()
@@ -124,7 +127,7 @@ public class MouseRayCast : MonoBehaviour
             {
                 uiController.ShowPickUpUI();
                 uiController.HideDropOffUI();
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     Debug.Log("pickup the PaTATO!");
 
@@ -150,10 +153,34 @@ public class MouseRayCast : MonoBehaviour
                 uiController.ShowPickUpUI();
                 uiController.HideDropOffUI();
                 Debug.Log("get chicken");
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     Debug.Log("pickup the Chicken!");
                     picker.PickUpGameObject(rayCastObject);
+                    
+                }
+            }
+            else if (gameObj.tag == "Sheep")
+            {
+                uiController.ShowWhistleUI();
+                uiController.HideDropOffUI();
+                Debug.Log("get sheep");
+                if (Input.GetMouseButtonUp(0))
+                {
+                    BehaviorTree bt =  rayCastObject.GetComponent<BehaviorTree>();
+                    if(bt)
+                    {
+                        audioSource.Play();
+                        bt.SendEvent<object>("whistle",5);
+                        AnimalController animal =rayCastObject.GetComponent<AnimalController>();
+                        if (animal&&!animal.IsFavored())
+                        {
+                            return;
+                        }
+                        Debug.Log("whistle the sheep!");
+                        // bt.enabled = false;
+                    }
+                   
                     
                 }
             }
@@ -162,7 +189,7 @@ public class MouseRayCast : MonoBehaviour
                 uiController.ShowPickUpUI();
                 uiController.HideDropOffUI();
                 Debug.Log("get apple");
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     Debug.Log("pickup the apple!");
                     picker.PickUpGameObject(rayCastObject);
@@ -179,7 +206,7 @@ public class MouseRayCast : MonoBehaviour
                   //  uiController.ShowUI();
                   
 
-                    if (Input.GetMouseButton(0))
+                    if (Input.GetMouseButtonUp(0))
                     {
                         appleTree.PickUpAppleInTheTree();
                         Debug.Log("get apple from the tree");
@@ -258,6 +285,7 @@ public class MouseRayCast : MonoBehaviour
             else
             {
                 uiController.HidePickUpUI();
+                uiController.HideWhistleUI();
             }
         }
         else

@@ -9,6 +9,8 @@ public class UIController : MonoBehaviour
     public GameObject PickUpUI;
 
     public GameObject DropThrowUI;
+
+    public GameObject WhislteUI;
     
     // Start is called before the first frame update
     void Start()
@@ -32,11 +34,23 @@ public class UIController : MonoBehaviour
     {
         PickUpUI.gameObject.SetActive(false);
     }
+    
+    public void ShowWhistleUI()
+    {
+        WhislteUI.gameObject.SetActive(true);
+    }
+    
+    public void HideWhistleUI()
+    {
+        WhislteUI.gameObject.SetActive(false);
+    }
+
 
     public void HideUI()
     {
         PickUpUI.gameObject.SetActive(false);
         DropThrowUI.gameObject.SetActive(false);
+        WhislteUI.gameObject.SetActive(false);
     }
 
     public void ShowDropOffUI()

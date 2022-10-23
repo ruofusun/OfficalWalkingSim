@@ -29,9 +29,16 @@ public class Picker : MonoBehaviour
         if (!canPick)
             return;
 
-        if (transform.childCount > 1 && transform.GetChild(1).gameObject != holdingTarget.gameObject)
+        if (transform.childCount > 1 )
         {
-            DropCertainGameObject(transform.GetChild(1).gameObject);
+            for (int i = 1; i < transform.childCount ; i++)
+            {
+                if (transform.GetChild(i).gameObject != holdingTarget.gameObject)
+                {
+                    DropCertainGameObject(transform.GetChild(i).gameObject);
+                }
+            }
+         
         }
 
         pickupGameObject = holdingTarget;

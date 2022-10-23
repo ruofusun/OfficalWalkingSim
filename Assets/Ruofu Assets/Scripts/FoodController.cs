@@ -39,6 +39,13 @@ public class FoodController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
+        if (other.gameObject.GetComponent<Terrain>())
+        {
+            rb.isKinematic = true;
+        }
+        
+
     }
 
     private void OnCollisionEnter(Collision other)

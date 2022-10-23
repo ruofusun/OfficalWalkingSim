@@ -12,10 +12,7 @@ TagManager:
   - Chicken
   - Apple
   - AppleTree
-  - Laser
-  - Enemy
-  - Text
-  - Door
+  - Sheep
   layers:
   - Default
   - TransparentFX
