@@ -131,7 +131,7 @@ public class AnimalController : MonoBehaviour
         detectedFood.Remove(targetFood);
         if(targetFood)
         Destroy(targetFood.gameObject);
-        currentFavor++;
+        currentFavor = favorThreshold;
         currentFavor = Mathf.Min(currentFavor, 2);
     }
 

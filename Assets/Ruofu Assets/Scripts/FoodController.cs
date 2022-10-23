@@ -40,7 +40,7 @@ public class FoodController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        if (other.gameObject.GetComponent<Terrain>())
+        if (other.gameObject.name.Contains("terrain"))
         {
             rb.isKinematic = true;
         }
@@ -51,7 +51,7 @@ public class FoodController : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         
-        if (other.gameObject.GetComponent<Terrain>())
+        if (other.gameObject.name.Contains("terrain"))
         {
             rb.isKinematic = true;
         }
