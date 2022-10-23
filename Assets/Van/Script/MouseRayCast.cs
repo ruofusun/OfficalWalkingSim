@@ -17,6 +17,8 @@ public class MouseRayCast : MonoBehaviour
     public bool isReadySleep;
     public ScenesManager scenesM;
     public float rayDistance = 1;
+    public GameObject observeObject;
+    public float observeDistance = 100;
 
     private UIController uiController;
     private AudioSource audioSource;
@@ -30,8 +32,35 @@ public class MouseRayCast : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    public void CompareHitAndObserve()
+    {
+        if (observeObject != rayCastObject)
+        {
+            if (rayCastObject != null)
+            {
+                OutlineReflection outline = rayCastObject.GetComponentInChildren<OutlineReflection>();
+                if (outline != null)
+                {
+                    outline.outlineShader.SetActive(false);
+                }
+
+                if (rayCastObject.tag == "Text")
+                {
+                    rayCastObject.GetComponent<TextMouse>().DecreaseScale();
+                    rayCastObject.GetComponent<TextMouse>().isRaycasting = false;
+
+                }
+
+                rayCastObject = null;
+            }
+
+        }
+    }
+
     private void Update()
     {
+        CompareHitAndObserve();
+
         if (!isReadyStore)
         {
             storeTimer += Time.deltaTime;
@@ -56,6 +85,9 @@ public class MouseRayCast : MonoBehaviour
         //�������������������������
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
+
+        // used to get the observe info without hitting any collider in hitInfo.
+        RaycastHit observeInfo;
         // Bit shift the index of the layer (2) to get a bit mask
         int layerMask = 1 << 2;
 
@@ -63,32 +95,25 @@ public class MouseRayCast : MonoBehaviour
         // But instead we want to collide against everything except layer 2. The ~ operator does this, it inverts a bitmask.
         layerMask = ~layerMask;
 
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance, layerMask))
+        if(Physics.Raycast(transform.position + cameraVector, transform.forward, out observeInfo, observeDistance, layerMask))
         {
-            Debug.DrawLine(transform.position, hitInfo.point);
+            observeObject = observeInfo.collider.gameObject;
+        }
+
+        if (Physics.Raycast(transform.position + cameraVector, transform.forward, out hitInfo, rayDistance, layerMask))
+        {
+            Debug.DrawLine(transform.position + cameraVector, hitInfo.point);
 
             //�������ߣ�ֻ����scene��ͼ�в��ܿ���
             GameObject gameObj = hitInfo.collider.gameObject;
             Debug.Log("click object name is " + gameObj.name);
-/*            if (gameObj.name.Contains("Terrain"))
-            {
-                uiController.HideUI();
-            }*/
+            /*            if (gameObj.name.Contains("Terrain"))
+                        {
+                            uiController.HideUI();
+                        }*/
 
-            if (gameObj != rayCastObject)
-            {
-                if (rayCastObject != null)
-                {
-                   OutlineReflection outline = rayCastObject.GetComponentInChildren<OutlineReflection>(); 
-                    if (outline != null)
-                    {
-                        outline.outlineShader.SetActive(false);
-                    }
-                }
-
-                rayCastObject = gameObj;
-
-            }
+            CompareHitAndObserve();
+            rayCastObject = gameObj;
          
             OutlineReflection outline1 = rayCastObject.GetComponentInChildren<OutlineReflection>(); 
             if (outline1)
@@ -233,6 +258,28 @@ public class MouseRayCast : MonoBehaviour
                     {
                         Debug.Log("The work is not done yet!");
                     }
+                }
+            }
+            else if (gameObj.tag == "Door")
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    
+                }
+            }
+            else if (gameObj.tag == "Text")
+            {
+                TextMouse textMouse = gameObj.GetComponent<TextMouse>();
+
+                if (!textMouse.isRaycasting)
+                {
+                    textMouse.IncreaseScale();
+                    textMouse.isRaycasting = true;
+                }
+
+                if (Input.GetMouseButton(0))
+                {
+                    textMouse.OnClick();
                 }
             }
             else

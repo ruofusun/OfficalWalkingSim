@@ -20,7 +20,6 @@ public class SoundManager : MonoBehaviour
     public AudioClip walkingstepOnRoad;
     public AudioClip walkingstepOnFarm;
     public AudioClip clockAlarm;
-
     #endregion
 
     #region Scene2
@@ -37,6 +36,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource musicSource;
     public AudioSource dangerSource;
+    public AudioSource loopSESource;
 
     private void Awake()
     {
@@ -57,7 +57,7 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void PlaySoundEffect(AudioClip clipToPlay)
+    public void PlaySoundEffect(AudioClip clipToPlay,bool isLoop = false)
     {
         if (clipToPlay == null)
         {
@@ -67,5 +67,18 @@ public class SoundManager : MonoBehaviour
 
         GameObject newSound = Instantiate(SoundPrefab, Vector3.zero, Quaternion.identity);
         AudioSource newSoundSource = newSound.GetComponent<AudioSource>();
+        newSoundSource.loop = isLoop;
+        newSoundSource.clip = clipToPlay;
+
+        newSoundSource.Play();
+
+        if (!isLoop)
+        {
+            Destroy(newSound, clipToPlay.length);
+        }
+        else
+        {
+            loopSESource = newSoundSource;
+        }
     }
 }

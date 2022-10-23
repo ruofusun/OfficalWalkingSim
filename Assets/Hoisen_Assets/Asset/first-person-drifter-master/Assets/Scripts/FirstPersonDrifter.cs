@@ -161,7 +161,7 @@ public class FirstPersonDrifter: MonoBehaviour
               //  Debug.Log("inputy"+ inputY);
              //   Debug.Log("movedirection" + moveDirection);
                 
-                moveDirection.y = 0;
+               moveDirection.y = 0;
                moveDirection = fakePlayer.TransformDirection(moveDirection) * speed;
        
           //   moveDirection = moveDirection.normalized * speed;

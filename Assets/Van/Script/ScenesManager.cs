@@ -7,9 +7,21 @@ public class ScenesManager : MonoBehaviour
 {
     public Animator levelAni;
     public bool isScene1;
+
+    private void Start()
+    {
+        StartScene1();
+    }
+
     public void LoadScene()
     {
         levelAni.SetTrigger("isFadeOut");
+    }
+
+    public void StartScene1()
+    {
+        //²¥·ÅÄÖÁåÉù
+        SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.clockAlarm,true);
     }
 
     public void OnFadeComplete()
