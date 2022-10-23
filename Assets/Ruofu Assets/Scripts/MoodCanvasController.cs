@@ -95,7 +95,7 @@ public class MoodCanvasController : MonoBehaviour
             child.gameObject.SetActive(true);
         }
         contentImage.sprite = contents[(int)mood];
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         foreach (var child in children)
         {
             child.gameObject.SetActive(false);

@@ -99,7 +99,7 @@ public class MouseRayCast : MonoBehaviour
             {
                 uiController.ShowPickUpUI();
                 uiController.HideDropOffUI();
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     Debug.Log("pickup the PaTATO!");
 
@@ -125,7 +125,7 @@ public class MouseRayCast : MonoBehaviour
                 uiController.ShowPickUpUI();
                 uiController.HideDropOffUI();
                 Debug.Log("get chicken");
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     Debug.Log("pickup the Chicken!");
                     picker.PickUpGameObject(rayCastObject);
@@ -137,7 +137,7 @@ public class MouseRayCast : MonoBehaviour
                 uiController.ShowPickUpUI();
                 uiController.HideDropOffUI();
                 Debug.Log("get apple");
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     Debug.Log("pickup the apple!");
                     picker.PickUpGameObject(rayCastObject);
@@ -154,7 +154,7 @@ public class MouseRayCast : MonoBehaviour
                   //  uiController.ShowUI();
                   
 
-                    if (Input.GetMouseButton(0))
+                    if (Input.GetMouseButtonUp(0))
                     {
                         appleTree.PickUpAppleInTheTree();
                         Debug.Log("get apple from the tree");
