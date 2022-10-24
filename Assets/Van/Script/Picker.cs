@@ -85,6 +85,7 @@ public class Picker : MonoBehaviour
             pickupGameObject.transform.localPosition = chickenPosition;
             pickupGameObject.transform.localEulerAngles  = chickenRotation;
         }
+        SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.pickUpItem,false);
 
       uiController.ShowDropOffUI();
     }

@@ -10,7 +10,10 @@ public class ScenesManager : MonoBehaviour
 
     private void Start()
     {
-        StartScene1();
+        if (isScene1)
+        {
+            StartScene1();
+        }
     }
 
     public void LoadScene()
@@ -20,7 +23,7 @@ public class ScenesManager : MonoBehaviour
 
     public void StartScene1()
     {
-        //²¥·ÅÄÖÁåÉù
+        //Â²Â¥Â·Ã…Ã„Ã–ÃÃ¥Ã‰Ã¹
         SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.clockAlarm,true);
     }
 
