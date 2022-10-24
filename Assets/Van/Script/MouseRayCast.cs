@@ -273,7 +273,8 @@ public class MouseRayCast : MonoBehaviour
             {
                 if (Input.GetMouseButton(0))
                 {
-                    
+                    Debug.Log("Door is open");
+                    AnimationManager.Instance.doorAni.SetBool("isOpen", !AnimationManager.Instance.doorAni.GetBool("isOpen"));
                 }
             }
             else if (gameObj.tag == "Text")
