@@ -13,6 +13,8 @@ TagManager:
   - Apple
   - AppleTree
   - Sheep
+  - Door
+  - Cow
   layers:
   - Default
   - TransparentFX

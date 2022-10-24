@@ -39,7 +39,7 @@ public class CrowFlyAway : Action
 
         if (offset.sqrMagnitude < Offset)
         {
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);
             return TaskStatus.Success;
         }
 

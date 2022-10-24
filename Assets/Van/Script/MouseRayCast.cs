@@ -53,12 +53,18 @@ public class MouseRayCast : MonoBehaviour
 
                 rayCastObject = null;
             }
+            
+           
 
         }
+      
+        
     }
 
     private void Update()
     {
+
+
         CompareHitAndObserve();
 
         if (!isReadyStore)
@@ -76,6 +82,7 @@ public class MouseRayCast : MonoBehaviour
             picker.DropGameObject();
 
         }
+
         if (Input.GetMouseButtonDown(1) && picker.pickupGameObject)
         {
             picker.ThrowGameObject();
@@ -95,7 +102,8 @@ public class MouseRayCast : MonoBehaviour
         // But instead we want to collide against everything except layer 2. The ~ operator does this, it inverts a bitmask.
         layerMask = ~layerMask;
 
-        if(Physics.Raycast(transform.position + cameraVector, transform.forward, out observeInfo, observeDistance, layerMask))
+        if (Physics.Raycast(transform.position + cameraVector, transform.forward, out observeInfo, observeDistance,
+            layerMask))
         {
             observeObject = observeInfo.collider.gameObject;
         }
@@ -114,8 +122,8 @@ public class MouseRayCast : MonoBehaviour
 
             CompareHitAndObserve();
             rayCastObject = gameObj;
-         
-            OutlineReflection outline1 = rayCastObject.GetComponentInChildren<OutlineReflection>(); 
+
+            OutlineReflection outline1 = rayCastObject.GetComponentInChildren<OutlineReflection>();
             if (outline1)
             {
                 outline1.outlineShader.SetActive(true);
@@ -157,14 +165,15 @@ public class MouseRayCast : MonoBehaviour
                 {
                     Debug.Log("pickup the Chicken!");
                     picker.PickUpGameObject(rayCastObject);
-                    
+
                 }
             }
-            else if (gameObj.tag == "Sheep")
-            {
+            else if (gameObj.tag == "Sheep"|| gameObj.tag =="Cow")
+
+    {
                 uiController.ShowWhistleUI();
                 uiController.HideDropOffUI();
-                Debug.Log("get sheep");
+                Debug.Log("get sheep or cow");
                 if (Input.GetMouseButtonUp(0))
                 {
                     BehaviorTree bt =  rayCastObject.GetComponent<BehaviorTree>();
@@ -177,7 +186,7 @@ public class MouseRayCast : MonoBehaviour
                         {
                             return;
                         }
-                        Debug.Log("whistle the sheep!");
+                        Debug.Log("whistle the sheep or cow!");
                         // bt.enabled = false;
                     }
                    

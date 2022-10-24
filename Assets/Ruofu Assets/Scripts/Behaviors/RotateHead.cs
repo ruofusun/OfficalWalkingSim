@@ -11,6 +11,10 @@ public class RotateHead : Action
 
 
     Rigidbody rb;
+
+    public float minAngle = -90f;
+
+    public float maxAngle = 90f;
     //  private EnemyController enemy;
     //   SpriteRenderer sp;
 
@@ -24,7 +28,7 @@ public class RotateHead : Action
         //   enemy =  GetComponent<EnemyController>();
         if (rb )
         {
-            rb.DORotate(new Vector3(0, Random.Range(-90f, 90f), 0), 1f);
+            rb.DORotate(new Vector3(0, Random.Range(minAngle, maxAngle), 0), 1f);
             status = TaskStatus.Success;
         }
         else 
