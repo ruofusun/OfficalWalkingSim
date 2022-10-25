@@ -50,5 +50,11 @@ public class CrowController : MonoBehaviour
                 behaviorTree.SendEvent<object>("hit",5);
             }
         }
+      AnimalController animal = other.gameObject.GetComponent<AnimalController>();
+        if (animal&& animal.gameObject.tag =="Chicken" && animal.GetComponent<Rigidbody>().isKinematic==false)
+        {
+            Debug.Log(" hit crow");
+            behaviorTree.SendEvent<object>("hit",5);
+        }
     }
 }
