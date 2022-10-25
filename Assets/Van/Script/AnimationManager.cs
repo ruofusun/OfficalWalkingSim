@@ -7,6 +7,7 @@ public class AnimationManager : MonoBehaviour
     public static AnimationManager Instance;
 
     public Animator doorAni;
+    public Animator bodyAni;
     private void Awake()
     {
         if (Instance == null)
