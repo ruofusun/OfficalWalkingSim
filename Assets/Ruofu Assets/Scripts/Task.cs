@@ -14,11 +14,13 @@ public class Task : MonoBehaviour
     private bool taskFinished = false;
     private int currentAmount = 0;
     public List<Transform> positions;
+
+    private TaskManager _taskManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        _taskManager = FindObjectOfType<TaskManager>();
     }
 
     // Update is called once per frame
@@ -54,12 +56,20 @@ public class Task : MonoBehaviour
                 {
                     taskFinished = true;
                     //todo: add ui here
-                    
+                    _taskManager.CheckTaskStatus();
+
                     Debug.Log("finish one task");
                     currentAmount = 0;
                 }
 
             }
         }
+    }
+
+
+    public bool TaskFinished
+    {
+        get => taskFinished;
+        set => taskFinished = value;
     }
 }

@@ -88,6 +88,7 @@ public class Picker : MonoBehaviour
         SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.pickUpItem,false);
 
       uiController.ShowDropOffUI();
+      uiController.HidePickUpUI();
     }
 
     public void DropGameObject()

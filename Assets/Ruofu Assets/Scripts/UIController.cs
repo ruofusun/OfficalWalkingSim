@@ -48,6 +48,7 @@ public class UIController : MonoBehaviour
 
     public void HideUI()
     {
+        Debug.Log("hide ui");
         PickUpUI.gameObject.SetActive(false);
         DropThrowUI.gameObject.SetActive(false);
         WhislteUI.gameObject.SetActive(false);
@@ -55,11 +56,13 @@ public class UIController : MonoBehaviour
 
     public void ShowDropOffUI()
     {
+        Debug.Log("show drop off ui");
         DropThrowUI.gameObject.SetActive(true);
     }
 
     public void HideDropOffUI()
     {
+        Debug.Log("hide drop off ui");
         DropThrowUI.gameObject.SetActive(false);
     }
 }

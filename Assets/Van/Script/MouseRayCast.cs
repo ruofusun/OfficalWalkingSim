@@ -133,8 +133,11 @@ public class MouseRayCast : MonoBehaviour
             //��ײĿ��ΪPatatoʱ��
             if (gameObj.tag == "Patato")
             {
-                uiController.ShowPickUpUI();
-                uiController.HideDropOffUI();
+                if (picker.pickupGameObject== null)
+                {
+                    uiController.ShowPickUpUI();
+                    uiController.HideDropOffUI();
+                }
                 if (Input.GetMouseButtonUp(0))
                 {
                     Debug.Log("pickup the PaTATO!");
@@ -158,8 +161,11 @@ public class MouseRayCast : MonoBehaviour
             }
             else if (gameObj.tag == "Chicken")
             {
-                uiController.ShowPickUpUI();
-                uiController.HideDropOffUI();
+                if (picker.pickupGameObject== null)
+                {
+                    uiController.ShowPickUpUI();
+                    uiController.HideDropOffUI();
+                }
                 Debug.Log("get chicken");
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -169,10 +175,12 @@ public class MouseRayCast : MonoBehaviour
                 }
             }
             else if (gameObj.tag == "Sheep"|| gameObj.tag =="Cow")
-
-    {
-                uiController.ShowWhistleUI();
-                uiController.HideDropOffUI();
+            {
+                if (picker.pickupGameObject== null)
+                {
+                    uiController.ShowWhistleUI();
+                    uiController.HideDropOffUI();
+                }
                 Debug.Log("get sheep or cow");
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -195,8 +203,11 @@ public class MouseRayCast : MonoBehaviour
             }
             else if (gameObj.tag == "Apple")
             {
-                uiController.ShowPickUpUI();
-                uiController.HideDropOffUI();
+                if (picker.pickupGameObject== null)
+                {
+                    uiController.ShowPickUpUI();
+                    uiController.HideDropOffUI();
+                }
                 Debug.Log("get apple");
                 if (Input.GetMouseButtonUp(0))
                 {
