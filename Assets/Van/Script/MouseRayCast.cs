@@ -9,7 +9,7 @@ public class MouseRayCast : MonoBehaviour
     public Picker picker;
     //public ScenesManager sceneM;
     public PatatoCollector patatoCollector;
-    public Vector3 cameraVector;
+    public Camera camera;
     public FirstPersonDrifter drifter;
     public float storeTimer;
     public float storeLimit;
@@ -77,17 +77,22 @@ public class MouseRayCast : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && picker.pickupGameObject)
+        if (!scenesM.isScene1)
         {
-            picker.DropGameObject();
+            if (Input.GetMouseButtonDown(0) && picker.pickupGameObject)
+            {
+                picker.DropGameObject();
 
+            }
+
+            if (Input.GetMouseButtonDown(1) && picker.pickupGameObject)
+            {
+                picker.ThrowGameObject();
+
+            }
         }
 
-        if (Input.GetMouseButtonDown(1) && picker.pickupGameObject)
-        {
-            picker.ThrowGameObject();
 
-        }
 
         //�������������������������
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -102,15 +107,15 @@ public class MouseRayCast : MonoBehaviour
         // But instead we want to collide against everything except layer 2. The ~ operator does this, it inverts a bitmask.
         layerMask = ~layerMask;
 
-        if (Physics.Raycast(transform.position + cameraVector, transform.forward, out observeInfo, observeDistance,
+        if (Physics.Raycast(camera.transform.position, transform.forward, out observeInfo, observeDistance,
             layerMask))
         {
             observeObject = observeInfo.collider.gameObject;
         }
 
-        if (Physics.Raycast(transform.position + cameraVector, transform.forward, out hitInfo, rayDistance, layerMask))
+        if (Physics.Raycast(camera.transform.position, transform.forward, out hitInfo, rayDistance, layerMask))
         {
-            Debug.DrawLine(transform.position + cameraVector, hitInfo.point);
+            Debug.DrawLine(camera.transform.position, hitInfo.point);
 
             //�������ߣ�ֻ����scene��ͼ�в��ܿ���
             GameObject gameObj = hitInfo.collider.gameObject;
@@ -133,13 +138,15 @@ public class MouseRayCast : MonoBehaviour
             //��ײĿ��ΪPatatoʱ��
             if (gameObj.tag == "Patato")
             {
-                if (picker.pickupGameObject== null)
+                if (!scenesM.isScene1)
                 {
                     uiController.ShowPickUpUI();
                     uiController.HideDropOffUI();
                 }
+
                 if (Input.GetMouseButtonUp(0))
                 {
+                    SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.patatoHarvest);
                     Debug.Log("pickup the PaTATO!");
 
                     if (scenesM.isScene1)
@@ -161,11 +168,8 @@ public class MouseRayCast : MonoBehaviour
             }
             else if (gameObj.tag == "Chicken")
             {
-                if (picker.pickupGameObject== null)
-                {
-                    uiController.ShowPickUpUI();
-                    uiController.HideDropOffUI();
-                }
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
                 Debug.Log("get chicken");
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -175,12 +179,10 @@ public class MouseRayCast : MonoBehaviour
                 }
             }
             else if (gameObj.tag == "Sheep"|| gameObj.tag =="Cow")
-            {
-                if (picker.pickupGameObject== null)
-                {
-                    uiController.ShowWhistleUI();
-                    uiController.HideDropOffUI();
-                }
+
+    {
+                uiController.ShowWhistleUI();
+                uiController.HideDropOffUI();
                 Debug.Log("get sheep or cow");
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -203,11 +205,8 @@ public class MouseRayCast : MonoBehaviour
             }
             else if (gameObj.tag == "Apple")
             {
-                if (picker.pickupGameObject== null)
-                {
-                    uiController.ShowPickUpUI();
-                    uiController.HideDropOffUI();
-                }
+                uiController.ShowPickUpUI();
+                uiController.HideDropOffUI();
                 Debug.Log("get apple");
                 if (Input.GetMouseButtonUp(0))
                 {

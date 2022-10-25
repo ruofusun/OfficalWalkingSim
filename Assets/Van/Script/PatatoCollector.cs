@@ -45,7 +45,7 @@ public class PatatoCollector : MonoBehaviour
     //return true if the store amount is greater or equal to 30.
     public bool CheckPatatoCondition()
     {
-        if(amountOfStorePatato >= 10)
+        if(amountOfStorePatato >= 3)
         {
             return true;
         }
