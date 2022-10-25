@@ -75,7 +75,7 @@ public class MouseLook : MonoBehaviour
             rotAverageX /= rotArrayX.Count;
             rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
 
-            Debug.Log("test  " + rotAverageX);
+            //Debug.Log("test  " + rotAverageX);
 
             Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
             //transform.localRotation = originalRotation * xQuaternion;          
