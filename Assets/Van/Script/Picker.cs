@@ -211,6 +211,10 @@ public class Picker : MonoBehaviour
                 rb.isKinematic = false;
                 rb.useGravity = true;
                 rb.AddForce(transform.forward * rb.mass * 5f, ForceMode.Impulse);
+                if (pickupGameObject.tag == "Chicken")
+                {
+                    SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.chickenThrow);
+                }
             }
 
             BehaviorTree bt = pickupGameObject.GetComponent<BehaviorTree>();

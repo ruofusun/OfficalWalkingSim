@@ -67,7 +67,7 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void PlaySoundEffect(AudioClip clipToPlay, bool isLoop = false, bool fadeIn = false)
+    public void PlaySoundEffect(AudioClip clipToPlay, bool isLoop = false, bool fadeIn = false, float volume  =1)
     {
         if (clipToPlay == null)
         {
@@ -79,12 +79,13 @@ public class SoundManager : MonoBehaviour
         AudioSource newSoundSource = newSound.GetComponent<AudioSource>();
         newSoundSource.loop = isLoop;
         newSoundSource.clip = clipToPlay;
+        newSoundSource.volume = volume;
 
         newSoundSource.Play();
 
         if (fadeIn)
         {
-            FadeInAudio(newSoundSource, 0.6f, 4);
+            FadeInAudio(newSoundSource, 0.4f, 7);
         }
 
 

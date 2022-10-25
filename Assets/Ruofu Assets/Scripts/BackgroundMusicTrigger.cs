@@ -22,7 +22,7 @@ public class BackgroundMusicTrigger : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() && !musicTriggered)
         {
-            SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.scene2Bgm,true, true);
+            SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.scene2Bgm,true,true);
             musicTriggered = true;
         }
     }

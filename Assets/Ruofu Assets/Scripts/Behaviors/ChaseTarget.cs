@@ -45,6 +45,8 @@ public class ChaseTarget :Action
         //send afraid event to the other animals
         var behaviorTree = crow.target.GetComponent<BehaviorTree>();
         behaviorTree.SendEvent<object>("afraid",5);
+ 
+
 
         Vector3 rotation = crow.target.transform.rotation.eulerAngles;
         transform.eulerAngles = rotation;

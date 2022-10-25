@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inthefarm: 1
-  IsNPC: 0
+  IsNPC: 1
   IsTutorialChicken: 0
   desiredFoodType: 0
   favorThreshold: 1
