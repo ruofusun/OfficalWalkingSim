@@ -151,7 +151,11 @@ public class MouseRayCast : MonoBehaviour
 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.patatoHarvest);
+                    if (scenesM.isScene1)
+                    {
+                        SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.patatoHarvest);
+                    }
+
                     Debug.Log("pickup the PaTATO!");
 
                     if (scenesM.isScene1)

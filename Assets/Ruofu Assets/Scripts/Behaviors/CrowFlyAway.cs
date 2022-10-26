@@ -39,6 +39,7 @@ public class CrowFlyAway : Action
 
         if (offset.sqrMagnitude < Offset)
         {
+            crow.CheckEventStatusAndChangeMusic();
             gameObject.SetActive(false);
             return TaskStatus.Success;
         }

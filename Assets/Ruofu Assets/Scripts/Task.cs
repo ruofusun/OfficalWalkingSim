@@ -16,11 +16,22 @@ public class Task : MonoBehaviour
     public List<Transform> positions;
 
     private TaskManager _taskManager;
+    private TaskCanvasController _taskCanvasController;
+
+   public enum TaskType
+    {
+        chicken,
+        sheep,
+        cow
+    }
+
+    public TaskType type = TaskType.chicken;
     
     // Start is called before the first frame update
     void Start()
     {
         _taskManager = FindObjectOfType<TaskManager>();
+        _taskCanvasController = FindObjectOfType<TaskCanvasController>();
     }
 
     // Update is called once per frame
@@ -36,7 +47,7 @@ public class Task : MonoBehaviour
             AnimalController animal = other.GetComponent<AnimalController>();
             if (animal)
             {
-                if (animal.transform.parent.tag == "Player")
+                if (animal.transform.parent && animal.transform.parent.tag == "Player")
                 {
                     animal.transform.parent = null;
                 }
@@ -46,9 +57,11 @@ public class Task : MonoBehaviour
                 animal.GetComponent<BehaviorTree>().enabled = false;
                 Rigidbody rb = animal.GetComponent<Rigidbody>();
                 rb.velocity = Vector3.zero;
-                rb.DOMove(positions[currentAmount].position, 5);
+                float distance = Vector3.Distance(animal.transform.position, positions[currentAmount].position);
+                
+                rb.DOMove(positions[currentAmount].position, distance);
                 //animal.transform.DOMove(positions[currentAmount].position, 5);
-                rb.DORotate(positions[currentAmount].eulerAngles, 3f);
+                rb.DORotate(positions[currentAmount].eulerAngles, distance);
                 rb.isKinematic = true;
                 currentAmount++;
                 animal.tag = "Untagged";
@@ -56,6 +69,25 @@ public class Task : MonoBehaviour
                 {
                     taskFinished = true;
                     //todo: add ui here
+                    switch (type)
+                    {
+                        case TaskType.chicken:
+                        {
+                            _taskCanvasController.LoadEggUI();
+                            break;
+                        }
+                        case TaskType.cow:
+                        {
+                            _taskCanvasController.LoadWhistleUI();
+                            break;
+                        }
+                        case TaskType.sheep:
+                        {
+                            _taskCanvasController.LoadBallUI();
+                            break;
+                        }
+
+                    }
                     _taskManager.CheckTaskStatus();
 
                     Debug.Log("finish one task");

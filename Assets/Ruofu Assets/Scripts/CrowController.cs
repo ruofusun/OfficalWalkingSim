@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BehaviorDesigner.Runtime;
 using UnityEngine;
 
@@ -48,6 +49,7 @@ public class CrowController : MonoBehaviour
             if ( !food.NeedPickUp)
             {
                 behaviorTree.SendEvent<object>("hit",5);
+                CheckEventStatusAndChangeMusic();
             }
         }
       AnimalController animal = other.gameObject.GetComponent<AnimalController>();
@@ -55,6 +57,17 @@ public class CrowController : MonoBehaviour
         {
             Debug.Log(" hit crow");
             behaviorTree.SendEvent<object>("hit",5);
+            CheckEventStatusAndChangeMusic();
+        }
+    }
+
+
+    public void CheckEventStatusAndChangeMusic()
+    {
+        List<CrowController> crows = FindObjectsOfType<CrowController>().ToList();
+        if (crows.Count == 1)
+        {
+            SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.scene2Bgm,true,true);
         }
     }
 }

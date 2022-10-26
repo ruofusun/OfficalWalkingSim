@@ -83,17 +83,33 @@ public class SoundManager : MonoBehaviour
         newSoundSource.clip = clipToPlay;
         newSoundSource.volume = volume;
 
-        newSoundSource.Play();
+        if (!fadeIn)
+        {
+            newSoundSource.Play();
+        }
+        
 
         if (fadeIn)
         {
             if (fadeInAudioSource !=null && fadeInAudioSource.clip != clipToPlay)
             {
-                
-                FadeOutAudio(fadeInAudioSource, 7);
+                Debug.Log("fade in clip" + fadeInAudioSource.clip + "clip to play" + clipToPlay);
+                FadeOutAudio(fadeInAudioSource, 3);
+                FadeInAudio(newSoundSource, 0.4f, 7);
+                newSoundSource.Play();
+            }else if (fadeInAudioSource == null)
+            {
+                FadeInAudio(newSoundSource, 0.4f, 7);
+                newSoundSource.Play();
+            }
+            else
+            {
+               newSoundSource.gameObject.SetActive(false);
+               newSoundSource = null;
             }
 
-            FadeInAudio(newSoundSource, 0.4f, 7);
+            // FadeInAudio(newSoundSource, 0.4f, 7);
+            if(newSoundSource)
             fadeInAudioSource = newSoundSource;
         }
 
@@ -117,6 +133,7 @@ public class SoundManager : MonoBehaviour
 
     public void FadeOutAudio(AudioSource source, float timeToFade)
     {
+        Debug.Log("fade out" + source.clip);
         StartCoroutine(LinearFadeOut(source, timeToFade));
     }
 
