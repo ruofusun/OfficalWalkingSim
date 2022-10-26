@@ -27,9 +27,9 @@ public class Patato : MonoBehaviour
             GameObject mashPotato = Instantiate(mashedPotato);
             mashPotato.transform.SetParent(parentRow.transform);
             Debug.Log(parentRow.transform);
-            mashedPotato.transform.localPosition = this.transform.localPosition;
+            mashPotato.transform.localPosition = this.transform.localPosition;
             SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.patatoCrash);
-            //Audio:�Ȼ�����Ч
+            //Audio:²È»µµÄÒôÐ§
             Debug.Log("You step on a patato, what a waste!!!");
             Destroy(this.gameObject);
         }
