@@ -22,7 +22,7 @@ public class TaskManager : MonoBehaviour
     {
         foreach (var task in tasks)
         {
-            if (task.TaskFinished)
+            if (!task.TaskFinished)
             {
                 return false;
             }

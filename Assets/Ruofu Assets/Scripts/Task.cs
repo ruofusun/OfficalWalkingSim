@@ -36,7 +36,7 @@ public class Task : MonoBehaviour
             AnimalController animal = other.GetComponent<AnimalController>();
             if (animal)
             {
-                if (animal.transform.parent.tag == "Player")
+                if (animal.transform.parent && animal.transform.parent.tag == "Player")
                 {
                     animal.transform.parent = null;
                 }
@@ -46,9 +46,11 @@ public class Task : MonoBehaviour
                 animal.GetComponent<BehaviorTree>().enabled = false;
                 Rigidbody rb = animal.GetComponent<Rigidbody>();
                 rb.velocity = Vector3.zero;
-                rb.DOMove(positions[currentAmount].position, 5);
+                float distance = Vector3.Distance(animal.transform.position, positions[currentAmount].position);
+                
+                rb.DOMove(positions[currentAmount].position, distance);
                 //animal.transform.DOMove(positions[currentAmount].position, 5);
-                rb.DORotate(positions[currentAmount].eulerAngles, 3f);
+                rb.DORotate(positions[currentAmount].eulerAngles, distance);
                 rb.isKinematic = true;
                 currentAmount++;
                 animal.tag = "Untagged";
