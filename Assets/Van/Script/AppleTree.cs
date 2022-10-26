@@ -17,4 +17,18 @@ public class AppleTree : MonoBehaviour
         picker.PickUpGameObject(apples[0].gameObject);
         apples.RemoveAt(0);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Debug.Log("Player is on the tree");
+            other.GetComponent<FirstPersonDrifter>().isInTree = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        
+    }
 }
