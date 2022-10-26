@@ -37,6 +37,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip drop;
     public AudioClip generalthrow;
     public AudioClip danger;
+    public AudioClip crowSound;
 
     #endregion 
 

@@ -27,6 +27,7 @@ public class ChaseTarget :Action
         {
             crow.target.ChangeFavorValue(-1);
         }
+        SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.crowSound,false);
 
     }
 
