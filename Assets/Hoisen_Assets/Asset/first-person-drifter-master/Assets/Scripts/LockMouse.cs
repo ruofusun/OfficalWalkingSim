@@ -4,10 +4,11 @@ using UnityEngine;
 using System.Collections;
 
 public class LockMouse : MonoBehaviour
-{	
+{
+    public bool isLookUp = false;
 	void Start()
 	{
-		LockCursor(true);
+		//LockCursor(true);
 	}
 
     void Update()
@@ -15,8 +16,11 @@ public class LockMouse : MonoBehaviour
     	// lock when mouse is clicked
     	if( Input.GetMouseButtonDown(0) && Time.timeScale > 0.0f )
     	{
-    		LockCursor(true);
-    	}
+            if (isLookUp)
+            {
+                LockCursor(true);
+            }
+        }
     
     	// unlock when escape is hit
         if  ( Input.GetKeyDown(KeyCode.Escape) )

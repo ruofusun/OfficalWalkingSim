@@ -8,6 +8,7 @@ public class AnimationManager : MonoBehaviour
 
     public Animator doorAni;
     public Animator bodyAni;
+    public Animator clockAni;
     private void Awake()
     {
         if (Instance == null)

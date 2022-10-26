@@ -79,8 +79,8 @@ public class ScenesManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isPause = !isPause;
-            pauseCanvas.SetActive(isPause);
+            /*isPause = !isPause;
+            pauseCanvas.SetActive(isPause);*/
         }
     }
 }

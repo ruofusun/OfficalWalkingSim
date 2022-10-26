@@ -18,6 +18,8 @@ public class PatatoCollector : MonoBehaviour
     public TextMeshProUGUI text;
     public ScenesManager scenesM;
 
+    public GameObject napText;
+
     //check the patato amount, return false if the amount is above 10
     public bool PatatoCheck()
     {
@@ -48,6 +50,17 @@ public class PatatoCollector : MonoBehaviour
             amountOfPatatoInBag -= 1;
             ChangeSpeed();
         }
+        else
+        {
+            if(amountOfStorePatato <= 20)
+            {
+                TextManager.Instance.SaySomething("Need more Potato! Money!", 2);
+            }
+            else
+            {
+                TextManager.Instance.SaySomething("Made enough money today! Get some rest.", 2);
+            }
+        }
 
     }
 
@@ -63,6 +76,7 @@ public class PatatoCollector : MonoBehaviour
     {
         if(amountOfStorePatato >= 3)
         {
+            napText.SetActive(true);
             return true;
         }
         else
