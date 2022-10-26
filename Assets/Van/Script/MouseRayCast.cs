@@ -51,6 +51,11 @@ public class MouseRayCast : MonoBehaviour
 
                 }
 
+                if(rayCastObject.tag == "PatatoBox")
+                {
+                    uiController.HidePotatoUI();
+                }
+
                 rayCastObject = null;
             }
             
@@ -119,7 +124,7 @@ public class MouseRayCast : MonoBehaviour
 
             //�������ߣ�ֻ����scene��ͼ�в��ܿ���
             GameObject gameObj = hitInfo.collider.gameObject;
-            Debug.Log("click object name is " + gameObj.name);
+            //Debug.Log("click object name is " + gameObj.name);
             /*            if (gameObj.name.Contains("Terrain"))
                         {
                             uiController.HideUI();
@@ -248,6 +253,8 @@ public class MouseRayCast : MonoBehaviour
 
             else if (gameObj.tag == "PatatoBox")
             {
+                uiController.ShowPotatoUI();
+
                 if (Input.GetMouseButton(0) && isReadyStore)
                 {
                     isReadyStore = false;

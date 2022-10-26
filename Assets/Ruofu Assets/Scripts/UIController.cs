@@ -11,6 +11,8 @@ public class UIController : MonoBehaviour
     public GameObject DropThrowUI;
 
     public GameObject WhislteUI;
+
+    public GameObject potatoBoxUI;
     
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,15 @@ public class UIController : MonoBehaviour
         WhislteUI.gameObject.SetActive(false);
     }
 
+    public void ShowPotatoUI()
+    {
+        potatoBoxUI.SetActive(true);
+    }
+
+    public void HidePotatoUI()
+    {
+        potatoBoxUI.SetActive(false);
+    }
 
     public void HideUI()
     {

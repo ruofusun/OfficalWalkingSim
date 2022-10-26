@@ -56,7 +56,7 @@ public class MouseLook : MonoBehaviour
  
    void Update ()
    {
-        if (isLookUp)
+        if (isLookUp && !ScenesManager.Instance.isPause)
         {
             rotAverageX = 0f;
 
