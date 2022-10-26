@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Van/VanNewScene.unity
+    guid: 396c7183ce3ab184c865f0f69e759215
+  - enabled: 1
+    path: Assets/Ruofu Assets/Scenes/Ruofu's scene.unity
+    guid: a81b910aef3e13b408a791356f1945ae
   m_configObjects: {}

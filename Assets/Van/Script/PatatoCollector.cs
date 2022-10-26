@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PatatoCollector : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PatatoCollector : MonoBehaviour
     public float speedFactor;
 
     public FirstPersonDrifter drifter;
+
+    public GameObject potatoBox;
+    public GameObject freePotatoPrefab;
+
+    public TextMeshProUGUI text;
 
     //check the patato amount, return false if the amount is above 10
     public bool PatatoCheck()
@@ -36,12 +42,21 @@ public class PatatoCollector : MonoBehaviour
         Debug.Log("Storing   " + amountOfPatatoInBag);
         if(amountOfPatatoInBag > 0)
         {
+            DropPatatoInBox();
             amountOfStorePatato += 1;
             amountOfPatatoInBag -= 1;
             ChangeSpeed();
         }
 
     }
+
+    public void DropPatatoInBox()
+    {
+        GameObject patato = Instantiate(freePotatoPrefab);
+        patato.transform.SetParent(potatoBox.transform);
+        patato.transform.position = potatoBox.transform.position + Vector3.up * 1.5f + Vector3.right * Random.Range(-0.1f,0.1f) + Vector3.forward *Random.Range(-0.1f,0.1f); 
+    }
+
     //return true if the store amount is greater or equal to 30.
     public bool CheckPatatoCondition()
     {
@@ -53,5 +68,10 @@ public class PatatoCollector : MonoBehaviour
         {
             return false;
         }
+    }
+
+    private void Update()
+    {
+        text.text = amountOfStorePatato.ToString() + "/30";
     }
 }
