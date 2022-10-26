@@ -29,6 +29,8 @@ public class FakePlayer : MonoBehaviour
  
     Quaternion originalRotation;
 
+    public bool isLookUp;
+
     private void Start()
     {
         originalRotation = transform.localRotation;
@@ -36,37 +38,40 @@ public class FakePlayer : MonoBehaviour
 
     void Update ()
     {
-            
-        rotAverageX = 0f;
- 
-        rotationX += Input.GetAxis("Mouse X") * sensitivityX * Time.timeScale;
- 
-        rotArrayX.Add(rotationX);
- 
-        if (rotArrayX.Count >= framesOfSmoothing)
+        if (isLookUp)
         {
-            rotArrayX.RemoveAt(0);
-        }
-        for(int i = 0; i < rotArrayX.Count; i++)
-        {
-            rotAverageX += rotArrayX[i];
-        }
-        rotAverageX /= rotArrayX.Count;
-        rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
- 
-        Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);
-        //transform.localRotation = originalRotation * xQuaternion;          
-      
-            
-        
- 
-        Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
-        transform.localRotation = originalRotation * xQuaternion;
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
-        // transform.localRotation = new Quaternion(transform.localRotation.x, transform.localRotation.y, 0,
-        // 0);
+            rotAverageX = 0f;
 
+            rotationX += Input.GetAxis("Mouse X") * sensitivityX * Time.timeScale;
+
+            rotArrayX.Add(rotationX);
+
+            if (rotArrayX.Count >= framesOfSmoothing)
+            {
+                rotArrayX.RemoveAt(0);
+            }
+            for (int i = 0; i < rotArrayX.Count; i++)
+            {
+                rotAverageX += rotArrayX[i];
+            }
+            rotAverageX /= rotArrayX.Count;
+            rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
+
+            Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
+            //transform.localRotation = originalRotation * xQuaternion;          
+
+
+
+
+            Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
+            transform.localRotation = originalRotation * xQuaternion;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
+            // transform.localRotation = new Quaternion(transform.localRotation.x, transform.localRotation.y, 0,
+            // 0);
+
+        }
     }
+
     public static float ClampAngle (float angle, float min, float max)
     {
         angle = angle % 360;
