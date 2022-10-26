@@ -71,19 +71,7 @@ public class FirstPersonDrifter: MonoBehaviour
         jumpTimer = antiBunnyHopFactor;
         mouseLook = GetComponent<MouseLook>();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            Debug.Log("relased Q");
-            if (isInTree)
-            {
-                isInTree = false;
-                gravity = 10;
-            }
-        }
-    }
+ 
     void FixedUpdate() {
 
         if (!ScenesManager.Instance.isPause)
@@ -105,29 +93,17 @@ public class FirstPersonDrifter: MonoBehaviour
             Debug.DrawLine(myTransform.position,
              myTransform.position + transform.forward * 5, Color.cyan);
 
-
-
             //Climb Tree detection
             if (Physics.Raycast(myTransform.position, transform.forward, out hit, rayDistance * climbDetectRadius))
             {
                 if (hit.collider.tag == "Tree")
                 {
-
                     Debug.Log("test tree");
                     if (Input.GetKey(KeyCode.Q))
                     {
                         climbing = true;
-                        
                         //  mouseLook.SetSensitivity(0.5f);
-                        if (!isInTree)
-                        {
-                            gravity = 0;
-                            controller.Move(new Vector3(0, climbSpeed, 0) * Time.deltaTime);
-                        }
-                        else
-                        {
-                            
-                        }
+                        controller.Move(new Vector3(0, climbSpeed, 0) * Time.deltaTime);
                         //  moveDirection.y = climbSpeed;
                         // moveDirection.x = 0;
                     }
@@ -256,7 +232,7 @@ public class FirstPersonDrifter: MonoBehaviour
         //print ("Ouch! Fell " + fallDistance + " units!");   
     }
 
-/*    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "AppleTree")
         {
@@ -277,15 +253,6 @@ public class FirstPersonDrifter: MonoBehaviour
         if(other.tag == "AppleTree")
         {
             isInTree = true;
-            gravity = 0;
         }
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "AppleTree")
-        {
-            isInTree = false;
-        }
-    }*/
 }
