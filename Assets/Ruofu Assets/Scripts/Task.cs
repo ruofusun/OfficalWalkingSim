@@ -16,11 +16,22 @@ public class Task : MonoBehaviour
     public List<Transform> positions;
 
     private TaskManager _taskManager;
+    private TaskCanvasController _taskCanvasController;
+
+   public enum TaskType
+    {
+        chicken,
+        sheep,
+        cow
+    }
+
+    public TaskType type = TaskType.chicken;
     
     // Start is called before the first frame update
     void Start()
     {
         _taskManager = FindObjectOfType<TaskManager>();
+        _taskCanvasController = FindObjectOfType<TaskCanvasController>();
     }
 
     // Update is called once per frame
@@ -58,6 +69,25 @@ public class Task : MonoBehaviour
                 {
                     taskFinished = true;
                     //todo: add ui here
+                    switch (type)
+                    {
+                        case TaskType.chicken:
+                        {
+                            _taskCanvasController.LoadEggUI();
+                            break;
+                        }
+                        case TaskType.cow:
+                        {
+                            _taskCanvasController.LoadWhistleUI();
+                            break;
+                        }
+                        case TaskType.sheep:
+                        {
+                            _taskCanvasController.LoadBallUI();
+                            break;
+                        }
+
+                    }
                     _taskManager.CheckTaskStatus();
 
                     Debug.Log("finish one task");
