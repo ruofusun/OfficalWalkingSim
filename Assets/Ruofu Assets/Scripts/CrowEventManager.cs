@@ -35,6 +35,7 @@ public class CrowEventManager : MonoBehaviour
     void SpawnCrow()
     {
         audioSource.Play();
+        SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.danger,true,true);
         eventIndex = Mathf.Min(3, eventIndex);
         for (int i = 0; i < eventIndex; i++)
         {

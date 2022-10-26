@@ -36,8 +36,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip chikcenFear;
     public AudioClip drop;
     public AudioClip generalthrow;
+    public AudioClip danger;
 
-    #endregion
+    #endregion 
 
     #region General
 
@@ -67,6 +68,7 @@ public class SoundManager : MonoBehaviour
 
     }
 
+    private AudioSource fadeInAudioSource;
     public void PlaySoundEffect(AudioClip clipToPlay, bool isLoop = false, bool fadeIn = false, float volume  =1)
     {
         if (clipToPlay == null)
@@ -85,7 +87,14 @@ public class SoundManager : MonoBehaviour
 
         if (fadeIn)
         {
+            if (fadeInAudioSource !=null && fadeInAudioSource.clip != clipToPlay)
+            {
+                
+                FadeOutAudio(fadeInAudioSource, 7);
+            }
+
             FadeInAudio(newSoundSource, 0.4f, 7);
+            fadeInAudioSource = newSoundSource;
         }
 
 
