@@ -185,7 +185,7 @@ public class FirstPersonDrifter: MonoBehaviour
                 // Jump! But only if the jump button has been released and player has been grounded for a given number of frames
                 if (!Input.GetButton("Jump"))
                     jumpTimer++;
-                else if (!ScenesManager.Instance.isScene1 && jumpTimer >= antiBunnyHopFactor)
+                else if (jumpTimer >= antiBunnyHopFactor)
                 {
                     //  controller.Move(new Vector3(0, jumpSpeed, 0));
                     moveDirection.y = jumpSpeed;
