@@ -8,6 +8,7 @@ public class BodyAniEvent : MonoBehaviour
     public MouseLook mouseLook;
     public FakePlayer fakePl;
     public Animator animator;
+    public RectTransform CANVAS;
     
     
 
@@ -24,6 +25,11 @@ public class BodyAniEvent : MonoBehaviour
         if (animator)
         {
             animator.enabled = true;
+            if (CANVAS)
+            {
+                CANVAS.gameObject.SetActive(false);
+            }
+
             GetComponent<Animator>().enabled = false;
             //fakePl.transform.eulerAngles = new Vector3(player.transform.rotation.eulerAngles.x,
                // player.transform.rotation.eulerAngles.y, player.transform.rotation.eulerAngles.z);

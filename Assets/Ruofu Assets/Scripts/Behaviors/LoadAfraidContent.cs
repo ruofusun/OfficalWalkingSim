@@ -24,6 +24,19 @@ public class LoadAfraidContent : Action
                     SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.chikcenFear, false, false, 0.5f);
                 
             }
+            if (animal.gameObject.tag == "Sheep")
+            {
+                
+                SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.sheepFear, false, false, 0.5f);
+                
+            }
+            if (animal.gameObject.tag == "Cow")
+            {
+                
+                SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.cowFear, false, false, 0.5f);
+                
+            }
+            
         }
         else
         {

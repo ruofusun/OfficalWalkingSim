@@ -82,5 +82,14 @@ public class ScenesManager : MonoBehaviour
             isPause = !isPause;
             pauseCanvas.SetActive(isPause);
         }
+
+        if (isPause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }

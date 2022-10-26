@@ -34,6 +34,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip whistle;
     public AudioClip chickenThrow;
     public AudioClip chikcenFear;
+    public AudioClip sheepFear;
+    public AudioClip cowFear;
     public AudioClip drop;
     public AudioClip generalthrow;
     public AudioClip danger;
