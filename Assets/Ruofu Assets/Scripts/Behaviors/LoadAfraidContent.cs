@@ -33,7 +33,7 @@ public class LoadAfraidContent : Action
             if (animal.gameObject.tag == "Cow")
             {
                 
-                SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.cowFear, false, false, 0.5f);
+                SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.cowFear, false, false, 0.2f);
                 
             }
             

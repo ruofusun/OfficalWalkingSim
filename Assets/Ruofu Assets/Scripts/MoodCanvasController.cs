@@ -28,7 +28,8 @@ public class MoodCanvasController : MonoBehaviour
         heart,
         afraid,
         angry,
-        goal
+        goal,
+        desire
     }
 
 
@@ -67,6 +68,11 @@ public class MoodCanvasController : MonoBehaviour
     public void LoadHappyContent()
     {
         currentmood = Mood.heart;
+        LoadContent();
+    }
+    public void LoadDesireContent()
+    {
+        currentmood = Mood.desire;
         LoadContent();
     }
     
