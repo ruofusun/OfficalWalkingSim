@@ -19,6 +19,8 @@ public class AnimalController : MonoBehaviour
     private MoodCanvasController moodCanvasController;
     private BehaviorTree behaviorTree;
 
+
+    private Animator _animator;
     
     
     //favoribility system
@@ -37,6 +39,7 @@ public class AnimalController : MonoBehaviour
 
         detectedFood = new List<FoodController>();
         moodCanvasController = GetComponentInChildren<MoodCanvasController>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -145,6 +148,11 @@ public class AnimalController : MonoBehaviour
         currentFavor += value;
         currentFavor = Mathf.Min(currentFavor, 2);
         currentFavor = Mathf.Max(currentFavor, -1);
+    }
+
+    public void SetAnimatorToActive()
+    {
+        _animator.enabled = true;
     }
 
 }
