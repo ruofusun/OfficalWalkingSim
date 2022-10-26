@@ -16,6 +16,7 @@ public class PatatoCollector : MonoBehaviour
     public GameObject freePotatoPrefab;
 
     public TextMeshProUGUI text;
+    public ScenesManager scenesM;
 
     //check the patato amount, return false if the amount is above 10
     public bool PatatoCheck()
@@ -72,6 +73,9 @@ public class PatatoCollector : MonoBehaviour
 
     private void Update()
     {
-        text.text = amountOfStorePatato.ToString() + "/30";
+        if (scenesM.isScene1)
+        {
+            text.text = amountOfStorePatato.ToString() + "/20";
+        }
     }
 }
