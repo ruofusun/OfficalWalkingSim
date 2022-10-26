@@ -71,7 +71,19 @@ public class FirstPersonDrifter: MonoBehaviour
         jumpTimer = antiBunnyHopFactor;
         mouseLook = GetComponent<MouseLook>();
     }
- 
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            if (isInTree)
+            {
+                isInTree = false;
+                gravity = 10;
+            }
+        }
+    }
+
     void FixedUpdate() {
 
         if (!ScenesManager.Instance.isPause)
@@ -102,6 +114,16 @@ public class FirstPersonDrifter: MonoBehaviour
                     if (Input.GetKey(KeyCode.Q))
                     {
                         climbing = true;
+
+                        if (!isInTree)
+                        {
+                            gravity = 0;
+                            controller.Move(new Vector3(0, climbSpeed, 0) * Time.deltaTime);
+                        }
+                        else
+                        {
+
+                        }
                         //  mouseLook.SetSensitivity(0.5f);
                         controller.Move(new Vector3(0, climbSpeed, 0) * Time.deltaTime);
                         //  moveDirection.y = climbSpeed;
@@ -232,7 +254,7 @@ public class FirstPersonDrifter: MonoBehaviour
         //print ("Ouch! Fell " + fallDistance + " units!");   
     }
 
-    private void OnCollisionEnter(Collision collision)
+/*    private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "AppleTree")
         {
@@ -254,5 +276,5 @@ public class FirstPersonDrifter: MonoBehaviour
         {
             isInTree = true;
         }
-    }
+    }*/
 }
