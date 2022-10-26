@@ -9,16 +9,22 @@ public class BodyAniEvent : MonoBehaviour
     public FakePlayer fakePl;
     public Animator animator;
     
+    
 
     public void GiveLookRight()
     {
+        if (ScenesManager.Instance.isScene1)
+        {
+            TextManager.Instance.SaySomething("Get up and make the f*** money!", 3);
+        }
+
         mouseLook.enabled = true;
         mouseLook.isLookUp = true;
         fakePl.isLookUp = true;
         if (animator)
         {
             animator.enabled = true;
-            GetComponent<Animator>().enabled = false; 
+            GetComponent<Animator>().enabled = false;
             //fakePl.transform.eulerAngles = new Vector3(player.transform.rotation.eulerAngles.x,
                // player.transform.rotation.eulerAngles.y, player.transform.rotation.eulerAngles.z);
 
