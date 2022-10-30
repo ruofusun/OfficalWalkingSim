@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TaskCanvasController : MonoBehaviour
@@ -9,11 +10,14 @@ public class TaskCanvasController : MonoBehaviour
     public RectTransform  egg;
 
     public RectTransform popup;
+    private Picker _picker;
+
+    public GameObject RealEgg;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        _picker = FindObjectOfType<Picker>();
     }
 
     // Update is called once per frame
@@ -50,6 +54,10 @@ public class TaskCanvasController : MonoBehaviour
         whistle.gameObject.SetActive(false);
         ball.gameObject.SetActive(false);
         egg.gameObject.SetActive(true);
+        //pick up the egg now
+        GameObject holdEgg = Instantiate(RealEgg);
+        _picker.PickUpGameObject(holdEgg);
+        
     }
 
     public void HideAllUI()

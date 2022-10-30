@@ -28,7 +28,8 @@ public class RotateHead : Action
         //   enemy =  GetComponent<EnemyController>();
         if (rb )
         {
-            rb.DORotate(new Vector3(0, Random.Range(minAngle, maxAngle), 0), 1f);
+            float yEuler = rb.rotation.eulerAngles.y;
+            rb.DORotate(new Vector3(0, Random.Range(yEuler+minAngle, yEuler+maxAngle), 0), 1f);
             status = TaskStatus.Success;
         }
         else 

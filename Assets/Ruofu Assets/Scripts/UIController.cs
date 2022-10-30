@@ -30,6 +30,7 @@ public class UIController : MonoBehaviour
     public void ShowPickUpUI()
     {
         PickUpUI.gameObject.SetActive(true);
+        WhislteUI.gameObject.SetActive(false);
     }
     
     public void HidePickUpUI()
@@ -40,6 +41,7 @@ public class UIController : MonoBehaviour
     public void ShowWhistleUI()
     {
         WhislteUI.gameObject.SetActive(true);
+        PickUpUI.gameObject.SetActive(false);
     }
     
     public void HideWhistleUI()

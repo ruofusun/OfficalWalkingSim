@@ -11,7 +11,8 @@ public class FoodController : MonoBehaviour
     public enum FoodType
     {
         potato,
-        apple
+        apple,
+        egg
         
     }
 

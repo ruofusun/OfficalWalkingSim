@@ -59,6 +59,9 @@ public class FirstPersonDrifter: MonoBehaviour
     private Vector3 contactPoint;
     private bool playerControl = false;
     private int jumpTimer;
+    private bool speedUp = false;
+
+    public GameObject speedlineparticle;
 
     public Transform fakePlayer;
     void Start()
@@ -99,8 +102,17 @@ public class FirstPersonDrifter: MonoBehaviour
             //  Debug.Log("inputy"+ inputY);
             //   Debug.Log("movedirection" + moveDirection);
 
-            tempDir.y = 0;
+            tempDir.y = 0;  
             tempDir = fakePlayer.TransformDirection(moveDirection) * speed;
+
+            if (speedUp && (inputX != 0.0f || inputY != 0.0f))
+            {
+                speedlineparticle.SetActive(true);
+            }
+            else
+            {
+                speedlineparticle.SetActive(false);
+            }
 
             Debug.DrawLine(myTransform.position,
              myTransform.position + transform.forward * 5, Color.cyan);
@@ -252,6 +264,15 @@ public class FirstPersonDrifter: MonoBehaviour
     void FallingDamageAlert (float fallDistance)
     {
         //print ("Ouch! Fell " + fallDistance + " units!");   
+    }
+
+    public IEnumerator SpeedUpRoutine()
+    {
+        speed *= 2f;
+        speedUp = true;
+        yield return new WaitForSeconds(15f);
+        speed /= 2f;
+        speedUp = false;
     }
 
 /*    private void OnCollisionEnter(Collision collision)

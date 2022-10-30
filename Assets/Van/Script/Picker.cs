@@ -14,13 +14,17 @@ public class Picker : MonoBehaviour
 
     public Vector3 chickenRotation;
 
+    public Vector3 toolPosition;
+
     private bool canPick = true;
 
     private UIController uiController;
+    private FirstPersonDrifter _firstPersonDrifter;
 
     private void Start()
     {
         uiController = FindObjectOfType<UIController>();
+        _firstPersonDrifter = GetComponent<FirstPersonDrifter>();
     }
 
     public void PickUpGameObject(GameObject holdingTarget)
@@ -79,6 +83,11 @@ public class Picker : MonoBehaviour
                 anim.enabled = false;
             }
         }
+        if (holdingTarget.tag == "Tool")
+        {
+            pickupGameObject.transform.localPosition = toolPosition;
+
+        }
 
         if (holdingTarget.tag == "Chicken")
         {
@@ -95,6 +104,34 @@ public class Picker : MonoBehaviour
     {
         if (pickupGameObject)
         {
+
+            if (pickupGameObject.tag == "Tool")
+            {
+                // use the tool here 
+                FoodController tool = pickupGameObject.GetComponent<FoodController>();
+                if (tool)
+                {
+                    switch (tool.type)
+                    {
+                        case FoodController.FoodType.egg:
+                        {
+                           // 
+                           StartCoroutine(_firstPersonDrifter.SpeedUpRoutine());
+                           pickupGameObject.transform.SetParent(null);
+                           Destroy(pickupGameObject);
+                           pickupGameObject = null;
+                           
+                           return;
+                        }
+                    }
+                }
+
+                
+            }
+
+
+
+
 
             AnimalController animal = pickupGameObject.GetComponent<AnimalController>();
             if (animal && !animal.IsFavored())
@@ -147,6 +184,27 @@ public class Picker : MonoBehaviour
 
     public void DropCertainGameObject(GameObject obj)
         {
+            
+            if (pickupGameObject.tag == "Tool")
+            {
+                // use the tool here 
+                FoodController tool = pickupGameObject.GetComponent<FoodController>();
+                if (tool)
+                {
+                    switch (tool.type)
+                    {
+                        case FoodController.FoodType.egg:
+                        {
+                            // 
+                            StartCoroutine(_firstPersonDrifter.SpeedUpRoutine());
+                            pickupGameObject.transform.SetParent(null);
+                            Destroy(pickupGameObject);
+                            pickupGameObject = null;
+                            return;
+                        }
+                    }
+                }
+            }
             AnimalController animal = obj.GetComponent<AnimalController>();
                 if (animal&&!animal.IsFavored())
                 {
