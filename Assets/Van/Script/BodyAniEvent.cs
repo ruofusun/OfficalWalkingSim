@@ -6,7 +6,6 @@ public class BodyAniEvent : MonoBehaviour
 {
     public GameObject player;
     public MouseLook mouseLook;
-    public FirstPersonDrifter fpDrifter;
     public FakePlayer fakePl;
     public Animator animator;
     public RectTransform CANVAS;
@@ -22,7 +21,6 @@ public class BodyAniEvent : MonoBehaviour
 
         mouseLook.enabled = true;
         mouseLook.isLookUp = true;
-        fpDrifter.isLookUp = true;
         fakePl.isLookUp = true;
         if (animator)
         {
