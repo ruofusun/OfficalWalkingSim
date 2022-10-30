@@ -58,6 +58,7 @@ public class FirstPersonDrifter: MonoBehaviour
     private float rayDistance;
     private Vector3 contactPoint;
     private bool playerControl = false;
+    public bool isLookUp = false;
     private int jumpTimer;
 
     public Transform fakePlayer;
@@ -86,7 +87,7 @@ public class FirstPersonDrifter: MonoBehaviour
 
     void FixedUpdate() {
 
-        if (!ScenesManager.Instance.isPause)
+        if (isLookUp && !ScenesManager.Instance.isPause)
         {
             float inputX = Input.GetAxis("Horizontal");
             float inputY = Input.GetAxis("Vertical");
