@@ -21,6 +21,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip walkingstepOnRoad;
     public AudioClip walkingstepOnFarm;
     public AudioClip clockAlarm;
+    public AudioClip scene3Bgm;
 
     #endregion
 

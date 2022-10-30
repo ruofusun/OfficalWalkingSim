@@ -7,6 +7,7 @@ public class ScenesManager : MonoBehaviour
 {
     public Animator levelAni;
     public bool isScene1;
+    public bool isScene3;
     public bool isPause = false;
 
     public GameObject pauseCanvas;
@@ -36,6 +37,10 @@ public class ScenesManager : MonoBehaviour
         {
             StartScene1();
         }
+        else if (isScene3)
+        {
+            StartScene3();
+        }
     }
 
     public void LoadScene()
@@ -47,6 +52,11 @@ public class ScenesManager : MonoBehaviour
     {
         //²¥·ÅÄÖÁåÉù
         SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.clockAlarm,true);
+    }
+
+    public void StartScene3()
+    {
+        SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.scene3Bgm, true);
     }
 
     public void OnFadeComplete()
