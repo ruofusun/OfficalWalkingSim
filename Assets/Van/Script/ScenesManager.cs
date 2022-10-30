@@ -7,6 +7,7 @@ public class ScenesManager : MonoBehaviour
 {
     public Animator levelAni;
     public bool isScene1;
+    public bool isScene3;
     public bool isPause = false;
 
     public GameObject pauseCanvas;
@@ -30,11 +31,17 @@ public class ScenesManager : MonoBehaviour
         //Set the appropriate clips and volume on music and danger loop, then play
 
     }
+
+    
     private void Start()
     {
         if (isScene1)
         {
             StartScene1();
+        }
+        else if (isScene3)
+        {
+            StartScene3();
         }
     }
 
@@ -47,6 +54,11 @@ public class ScenesManager : MonoBehaviour
     {
         //²¥·ÅÄÖÁåÉù
         SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.clockAlarm,true);
+    }
+
+    public void StartScene3()
+    {
+        SoundManager.Instance.PlaySoundEffect(SoundManager.Instance.scene3Bgm, true);
     }
 
     public void OnFadeComplete()
