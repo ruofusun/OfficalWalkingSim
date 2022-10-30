@@ -10,6 +10,14 @@ public class BodyAniEvent : MonoBehaviour
     public FakePlayer fakePl;
     public Animator animator;
     public RectTransform CANVAS;
+
+    public void CancelLookRight()
+    {
+        mouseLook.enabled = false;
+        mouseLook.isLookUp = false;
+        fpDrifter.isLookUp = false;
+        fakePl.isLookUp = false;
+    }
     
     
 

@@ -31,6 +31,8 @@ public class ScenesManager : MonoBehaviour
         //Set the appropriate clips and volume on music and danger loop, then play
 
     }
+
+    
     private void Start()
     {
         if (isScene1)

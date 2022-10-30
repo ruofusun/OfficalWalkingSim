@@ -23,6 +23,8 @@ public class MouseRayCast : MonoBehaviour
     private UIController uiController;
     private AudioSource audioSource;
 
+    public BodyAniEvent bodyAni;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -282,6 +284,7 @@ public class MouseRayCast : MonoBehaviour
                     if (isReadySleep)
                     {
                         Debug.Log("Make the transition");
+                        bodyAni.CancelLookRight();
                         scenesM.LoadScene();
                     }
                     else
